@@ -1,6 +1,3 @@
-// const User = require('../src/User');
-// const UserRepository = require('../src/UserRepository');
-
 class Hydration {
   constructor(userID, date, numOunces) {
     // this.hydrationData = hydrationData;
@@ -9,7 +6,17 @@ class Hydration {
     this.numOunces = numOunces;
   }
 
-  calculateAvgHydration() {
+  calculateAvgHydration(user) {
+    let hydrationToDate = user.hydrationToDate;
+    let dailyOunces = [];
+    hydrationToDate.forEach(hydration => {
+      dailyOunces.push(hydration.numOunces)
+    })
+    let ouncesSum = dailyOunces.reduce((acc, number) => {
+      return acc + number;
+    }, 0);
+    let avgDailyOunces = ouncesSum / dailyOunces.length
+    return Math.round(avgDailyOunces);
     // USE THE USER.hydrationToDate TO CALCULATE THE AVG FLUID OZ PER DAY OF ALL TIME
   }
 
