@@ -39,18 +39,18 @@ describe('Hydration', function() {
     user.logHydration(1, "2019/06/15", 37);
     user.logHydration(1, "2019/06/16", 75)
     user.logHydration(1, "2019/06/17", 42)
-    user.logHydration(1, "2018/06/18", 42)
-    user.logHydration(1, "2019/06/19", 42)
-    user.logHydration(1, "2019/06/20", 42)
-    user.logHydration(1, "2019/06/21", 42)
-    user.logHydration(1, "2019/06/22", 42)
-    user.logHydration(1, "2019/06/23", 42)
-    user.logHydration(1, "2019/06/24", 42)
-    user.logHydration(1, "2019/06/25", 42)
-    user.logHydration(1, "2019/06/26", 42)
+    user.logHydration(1, "2018/06/18", 49)
+    user.logHydration(1, "2019/06/19", 56)
+    user.logHydration(1, "2019/06/20", 34)
+    user.logHydration(1, "2019/06/21", 65)
+    user.logHydration(1, "2019/06/22", 77)
+    user.logHydration(1, "2019/06/23", 100)
+    user.logHydration(1, "2019/06/24", 67)
+    user.logHydration(1, "2019/06/25", 84)
+    user.logHydration(1, "2019/06/26", 49)
 
-    hydration.findWeeklyHydration(user, "2019/06/25")
-    // expect(hydration.findDailyHydration(user, "2019/08/15")).to.equal(75);
+    expect(hydration.findWeeklyHydration(user, "2019/06/25").length).to.equal(7);
+    expect(hydration.findWeeklyHydration(user, "2019/06/26").length).to.equal(7);
   });
 
 });

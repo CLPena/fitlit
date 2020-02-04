@@ -32,14 +32,14 @@ class Hydration {
   findWeeklyHydration(user, givenDate) {
     let hydrationToDate = user.hydrationToDate;
     let userHydration = hydrationToDate.filter(hydration => hydration.userID === this.userID);
-    // let givenDateIndex = userHydration.indexOf(givenDate);
-    console.log(userHydration);
+    let givenDateHydration = userHydration.find(hydration => hydration.date === givenDate)
+    let givenDateIndex = userHydration.indexOf(givenDateHydration);
+    let weeklyHydration = userHydration.slice(givenDateIndex - 6, givenDateIndex + 1);
+    return weeklyHydration;
     // USE THE USER.hydrationToDate TO find How many fluid ounces of water consumed each day over the course of a week (7 days) - return the amount for each day
   }
 
 }
-
-
 
 
 if (typeof module !== 'undefined') {
