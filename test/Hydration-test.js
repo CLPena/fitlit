@@ -34,4 +34,23 @@ describe('Hydration', function() {
     expect(hydration.findDailyHydration(user, "2019/08/15")).to.equal(75);
   });
 
+  it('find How many fluid ounces of water consumed each day over the course of a week (7 days)', function(){
+    let user = new User({id:1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', strideLength: 4.3, dailyStepGoal: 10000, friends: [16, 4, 8]});
+    user.logHydration(1, "2019/06/15", 37);
+    user.logHydration(1, "2019/06/16", 75)
+    user.logHydration(1, "2019/06/17", 42)
+    user.logHydration(1, "2018/06/18", 42)
+    user.logHydration(1, "2019/06/19", 42)
+    user.logHydration(1, "2019/06/20", 42)
+    user.logHydration(1, "2019/06/21", 42)
+    user.logHydration(1, "2019/06/22", 42)
+    user.logHydration(1, "2019/06/23", 42)
+    user.logHydration(1, "2019/06/24", 42)
+    user.logHydration(1, "2019/06/25", 42)
+    user.logHydration(1, "2019/06/26", 42)
+
+    hydration.findWeeklyHydration(user, "2019/06/25")
+    // expect(hydration.findDailyHydration(user, "2019/08/15")).to.equal(75);
+  });
+
 });

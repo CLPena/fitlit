@@ -29,11 +29,17 @@ class Hydration {
     // GO THROUGH THE USER.hydrationToDate ARRAY TO FIND THE OBJECT WITH MATCHING DATE
   }
 
-  findWeeklyHydration() {
-    // USE THE USER.hydrationToDate TO CALCULATE THE AVG FLUID OZ PER DAY OF THE LAST SEVEN DAYS
+  findWeeklyHydration(user, givenDate) {
+    let hydrationToDate = user.hydrationToDate;
+    let userHydration = hydrationToDate.filter(hydration => hydration.userID === this.userID);
+    // let givenDateIndex = userHydration.indexOf(givenDate);
+    console.log(userHydration);
+    // USE THE USER.hydrationToDate TO find How many fluid ounces of water consumed each day over the course of a week (7 days) - return the amount for each day
   }
 
 }
+
+
 
 
 if (typeof module !== 'undefined') {
