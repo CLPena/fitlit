@@ -1,9 +1,12 @@
+// const User = require('../src/User');
+// const UserRepository = require('../src/UserRepository');
+
 class Hydration {
-  constructor(hydrationData) {
-    this.hydrationData = hydrationData;
-    // this.userID = userID;
-    // this.date = date;
-    // this.numOunces = numOunces;
+  constructor(userID, date, numOunces) {
+    // this.hydrationData = hydrationData;
+    this.userID = userID;
+    this.date = date;
+    this.numOunces = numOunces;
   }
 
   calculateAvgHydration() {

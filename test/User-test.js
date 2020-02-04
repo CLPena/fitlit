@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const User = require('../src/User');
+const Hydration = require('../src/Hydration');
 
 describe('User', function() {
   let user;
@@ -47,6 +48,12 @@ describe('User', function() {
 
   it('should return a users first name only', function() {
     expect(user.getUsersFirstName()).to.equal('Luisa');
+  })
+
+  it('should keep track of hydration to date', function() {
+    user.logHydration(1, "2019/06/15", 37);
+    user.logHydration(1, "2019/06/15", 75)
+    expect(user.hydrationToDate.length).to.equal(2);
   })
 
 })

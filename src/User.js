@@ -1,3 +1,5 @@
+const Hydration = require('../src/Hydration');
+
 class User {
   constructor(userDataObj) {
     this.id = userDataObj.id;
@@ -7,14 +9,19 @@ class User {
     this.strideLength = userDataObj.strideLength;
     this.dailyStepGoal = userDataObj.dailyStepGoal;
     this.friends = userDataObj.friends;
-    this.hydrationToDate = ['Hydration objects'];
-    this.activityToDate = ['Activity objects'];
-    this.sleepToDate = ['Sleep objects'];
+    this.hydrationToDate = [];
+    this.activityToDate = [];
+    this.sleepToDate = [];
   }
 
   getUsersFirstName() {
     // RETURNS THE USERS FIRST NAME ONLY
     return this.name.split(' ')[0];
+  }
+
+  logHydration(userId, date, numOunces) {
+    var hydration = new Hydration(this.id, date, numOunces);
+    this.hydrationToDate.push(hydration);
   }
 }
 
