@@ -20,7 +20,12 @@ class Hydration {
     // USE THE USER.hydrationToDate TO CALCULATE THE AVG FLUID OZ PER DAY OF ALL TIME
   }
 
-  findDailyHydration() {
+  findDailyHydration(user, givenDate) {
+    let hydrationToDate = user.hydrationToDate;
+    let matchingDate = hydrationToDate.find(hydration => {
+      return hydration.date === givenDate;
+    });
+    return matchingDate.numOunces;
     // GO THROUGH THE USER.hydrationToDate ARRAY TO FIND THE OBJECT WITH MATCHING DATE
   }
 
