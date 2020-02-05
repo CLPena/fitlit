@@ -20,7 +20,7 @@ class User {
   }
 
   logHydration(userId, date, numOunces) {
-    var hydration = new Hydration(this.id, date, numOunces);
+    let hydration = new Hydration(this.id, date, numOunces);
     this.hydrationToDate.push(hydration);
   }
 }

@@ -4,9 +4,10 @@ var wrapper = document.querySelector('body');
 
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
+  let user = new User(userData[0])
   wrapper.insertAdjacentHTML('beforeend', `
   <header>
-    <h1>Welcome, <span>${userData[0].name}!</h1>
+    <h1>Welcome, <span>${user.getUsersFirstName()}!</h1>
   </header>
   <main>
     <section class='one'>

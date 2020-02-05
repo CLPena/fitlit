@@ -35,7 +35,7 @@ describe('Hydration', function() {
       user.logHydration(1, "2019/06/25", 84)
       user.logHydration(1, "2019/06/26", 49)
     })
-    
+
     it('should calculate the average fluid ounces consumed daily for all time', function(){
     expect(hydration.calculateAvgHydration(user)).to.equal(61);
     });
