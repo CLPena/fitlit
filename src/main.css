@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  border: 2px solid black;
+  color: skyblue;
   display: flex;
   justify-content: space-between;
   margin: 0 10%;
@@ -18,40 +18,46 @@ header {
 }
 
 main {
-  border: 2px solid violet;
   display: grid;
   grid-gap: 10px;
   grid-template-areas:
   "one two three";
-  /* grid-template-columns: 2fr 2fr 2fr; */
   grid-template-rows: 2fr 2fr 2fr;
   height: 100%;
   margin: 0 10%;
   padding: 1%;
 }
-
-.one {
-  background: #FFFFFF;
-  grid-area: one;
-  border-radius: 1%;
-  padding: 1%;
-}
-.two {
-  background: #FFFFFF;
-  grid-area: two;
-  border-radius: 1%;
-  padding: 1%;
-}
-
+.one,
+.two,
 .three {
   background: #FFFFFF;
-  grid-area: three;
   border-radius: 1%;
-  padding: 1%;;
+  padding: 1%;
+  text-align: justify;
 }
-
-.users-name {
+.one {
+  grid-area: one;
+}
+.two {
+  grid-area: two;
+}
+.three {
+  grid-area: three;
+}
+.user-name,
+p {
+  padding: 1%;
   text-align: center;
+}
+p {
+  text-decoration: underline;
+}
+.user-data {
+  padding: 1% 1% 3%;
+  text-decoration: none;
+}
+span {
+  font-weight: bold;
 }
 
 /*  */
