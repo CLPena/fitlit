@@ -21,21 +21,43 @@ describe('Hydration', function() {
   });
 
   describe('Hydration Records', function(){
+    let hydration1;
+    let hydration2;
+    let hydration3;
+    let hydration4;
+    let hydration5;
+    let hydration6;
+    let hydration7;
+    let hydration8;
+    let hydration9;
+    let hydration10;
     beforeEach(function() {
-      user.logHydration(1, "2019/06/15", 37);
-      user.logHydration(1, "2019/06/16", 75)
-      user.logHydration(1, "2019/06/17", 42)
-      user.logHydration(1, "2018/06/18", 49)
-      user.logHydration(1, "2019/06/19", 56)
-      user.logHydration(1, "2019/06/20", 34)
-      user.logHydration(1, "2019/06/21", 65)
-      user.logHydration(1, "2019/06/22", 77)
-      user.logHydration(1, "2019/06/23", 100)
-      user.logHydration(1, "2019/06/24", 67)
-      user.logHydration(1, "2019/06/25", 84)
-      user.logHydration(1, "2019/06/26", 49)
+      hydration1 = new Hydration(1, "2019/06/15", 37);
+      hydration2 = new Hydration(1, "2019/06/16", 75);
+      hydration3 = new Hydration(1, "2019/06/17", 42);
+      hydration4 = new Hydration(1, "2018/06/18", 49);
+      hydration5 = new Hydration(1, "2019/06/19", 56);
+      hydration6 = new Hydration(1, "2019/06/20", 34);
+      hydration7 = new Hydration(1, "2019/06/21", 65);
+      hydration8 = new Hydration(1, "2019/06/22", 77);
+      hydration9 = new Hydration(1, "2019/06/23", 100);
+      hydration10 = new Hydration(1, "2019/06/24", 67);
+      hydration11 = new Hydration(1, "2019/06/25", 84);
+      hydration12 = new Hydration(1, "2019/06/26", 49);
+      hydration1.logHydration(user);
+      hydration2.logHydration(user)
+      hydration3.logHydration(user)
+      hydration4.logHydration(user)
+      hydration5.logHydration(user)
+      hydration6.logHydration(user)
+      hydration7.logHydration(user)
+      hydration8.logHydration(user)
+      hydration9.logHydration(user)
+      hydration10.logHydration(user)
+      hydration11.logHydration(user)
+      hydration12.logHydration(user)
     })
-    
+
     it('should calculate the average fluid ounces consumed daily for all time', function(){
     expect(hydration.calculateAvgHydration(user)).to.equal(61);
     });

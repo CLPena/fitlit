@@ -1,4 +1,4 @@
-const Hydration = require('../src/Hydration');
+// const Hydration = require('../src/Hydration');
 
 class User {
   constructor(userDataObj) {
@@ -17,11 +17,6 @@ class User {
   getUsersFirstName() {
     // RETURNS THE USERS FIRST NAME ONLY
     return this.name.split(' ')[0];
-  }
-
-  logHydration(userId, date, numOunces) {
-    var hydration = new Hydration(this.id, date, numOunces);
-    this.hydrationToDate.push(hydration);
   }
 }
 
