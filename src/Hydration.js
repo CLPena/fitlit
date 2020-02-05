@@ -39,6 +39,10 @@ class Hydration {
     // USE THE USER.hydrationToDate TO find How many fluid ounces of water consumed each day over the course of a week (7 days) - return the amount for each day
   }
 
+  logHydration(user) {
+    user.hydrationToDate.push(this);
+  }
+
 }
 
 

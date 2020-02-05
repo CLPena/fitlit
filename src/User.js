@@ -18,11 +18,6 @@ class User {
     // RETURNS THE USERS FIRST NAME ONLY
     return this.name.split(' ')[0];
   }
-
-  logHydration(userId, date, numOunces) {
-    let hydration = new Hydration(this.id, date, numOunces);
-    this.hydrationToDate.push(hydration);
-  }
 }
 
 if (typeof module !== 'undefined') {

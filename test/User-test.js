@@ -51,8 +51,10 @@ describe('User', function() {
   })
 
   it('should keep track of hydration to date', function() {
-    user.logHydration(1, "2019/06/15", 37);
-    user.logHydration(1, "2019/06/15", 75)
+    let hydration1 = new Hydration(1, "2019/06/15", 37);
+    let hydration2 = new Hydration(1, "2019/06/16", 75);
+    hydration1.logHydration(user);
+    hydration2.logHydration(user)
     expect(user.hydrationToDate.length).to.equal(2);
   })
 
