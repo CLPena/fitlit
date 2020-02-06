@@ -99,4 +99,9 @@ describe('Sleep', function() {
   it('should find the average sleep quality for all users', function() {
     expect(sleep.getAvgSleepQuality()).to.equal(3);
   });
+
+  it('should find users who\'s avg sleep quality is greater than 3 for a given week', function() {
+    expect(sleep.getRestedUsers("2019/06/25")).to.deep.equal([sleep4, sleep6, sleep9]);
+    expect(sleep.getRestedUsers("2019/06/21")).to.deep.equal([sleep1, sleep4, sleep6]);
+  });
 });
