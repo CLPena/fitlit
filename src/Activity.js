@@ -7,13 +7,14 @@ class Activity {
     this.flightsOfStairs = flightsOfStairs;
     this.exceededStepGoal = [];
   }
-  
+
   getMilesWalked() {
-    // return the miles a user has walked based on their number of steps (use their strideLength to help calculate this)
+    // return the miles a user has walked based on their number of steps (use their strideLength to help calculate this) 5280 ft in 1 mile / 4 = 1320 = 2640 steps , 937 leftover steps, 0.4 miles ====== 1.4 miles
   }
 
-  getDailyActiveMinutes() {
+  getDailyActiveMinutes(id) {
     // For a user, (identified by their userID) how many minutes were they active for a given day (specified by a date)?
+    return this.minutesActive // ??
   }
 
   getWeeklyActiveMinutes() {
