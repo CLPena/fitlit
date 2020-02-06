@@ -21,10 +21,6 @@ class Sleep {
     return Math.round(avg);
   }
 
-  get(date) {
-    return this.sleepToDate.find(day => day.date === date);
-  }
-
   getHoursSleptOn(date) {
     return this.get(date).hoursSlept;
   }
@@ -42,6 +38,10 @@ class Sleep {
 
   log(sleepData) {
     this.sleepToDate.push(sleepData);
+  }
+
+  get(date) {
+    return this.sleepToDate.find(day => day.date === date);
   }
 }
 

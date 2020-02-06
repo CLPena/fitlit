@@ -46,7 +46,7 @@ describe('User', function() {
     expect(user.friends).to.deep.equal([16, 4, 8]);
   });
 
-  it('should return a users first name only', function() {
+  it('should return user\'s first name only', function() {
     expect(user.getUsersFirstName()).to.equal('Luisa');
   })
 
