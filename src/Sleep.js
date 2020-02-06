@@ -11,20 +11,15 @@ class Sleep {
     let avg = this.sleepToDate.reduce((acc, date) => {
       return acc + date.hoursSlept / this.sleepToDate.length;
     }, 0);
-    return Math.round(avg);
-  }
 
-  getSingleUserAvgSleepQuality() {
-    let avg = this.sleepToDate.reduce((acc, date) => {
-      return acc + date.sleepQuality / this.sleepToDate.length;
-    }, 0);
     return Math.round(avg);
   }
 
   getAvgSleepQuality() {
-    let avg = this.sleepToDate.reduce((acc, user) => {
-      return acc += user.sleepQuality / this.sleepToDate.length;
+    let avg = this.sleepToDate.reduce((acc, date) => {
+      return acc + date.sleepQuality / this.sleepToDate.length;
     }, 0);
+
     return Math.round(avg);
   }
 
@@ -36,7 +31,7 @@ class Sleep {
     return this.get(date).sleepQuality;
   }
 
-  getTheWeekOf(date) {
+  getHoursSleptTheWeekOf(date) {
     let dailyData = this.sleepToDate.filter(data => data.userID === this.userID);
     let currentDate = dailyData.indexOf(this.get(date));
     let weeklyData = dailyData.slice(currentDate - 6, currentDate + 1);

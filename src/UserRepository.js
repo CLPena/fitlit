@@ -14,13 +14,10 @@ class UserRepository {
     return Math.round(goals / this.userData.length);
   }
 
-  // getAvgSleepQuality() {
-  //   // GO THROUGH ALL USERS AND PULL ALL OF THEIR SLEEP OBJECTS AND FROM THAT PULL THE SLEEP QUALITY AND ADD ALL OF SLEEP QUALITY NUMBERS AND DIVIDE IT BUT THE TOTAL NUMBER sum of all sq is 30.2 out of 11 users and the avg is 2.7
-  //   console.log('hey')
-  // }
-
-  getGoodSleepers() {
-    // Find all users who average a sleep quality greater than 3 for a given week (7 days) - you should be able to calculate this for any week, not just the latest week
+  getAvgSleepQuality(data) {
+    let sum = 0;
+    data.sleepToDate.forEach(user => sum += user.sleepQuality);
+    return Math.round((sum / data.sleepToDate.length));
   }
 
   getBestSleeper() {
