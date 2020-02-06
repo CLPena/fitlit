@@ -6,18 +6,18 @@ class Sleep {
     this.sleepQuality = sleepQuality;
   }
 
-  // calculateAvgSleepHours(user) {
-  //   let sleepToDate = user.sleepToDate;
-  //   let dailySleep = [];
-  //   sleepToDate.forEach(sleep => {
-  //     dailySleep.push(sleep.hoursSlept)
-  //   });
-  //   let sum = dailySleep.reduce((acc, hours) => {
-  //     return acc + hours;
-  //   },0);
-  //   let avgHours = sum / dailySleep.length;
-  //   return Math.round(avgHours);
-  // }
+  calculateAvgSleepHours(user) {
+    let sleepToDate = user.sleepToDate;
+    let dailySleep = [];
+    sleepToDate.forEach(sleep => {
+      dailySleep.push(sleep.hoursSlept)
+    });
+    let sum = dailySleep.reduce((acc, hours) => {
+      return acc + hours;
+    },0);
+    let avgHours = sum / dailySleep.length;
+    return Math.round(avgHours);
+  }
 
   findDailySleepHours(user, givenDate) {
     let sleepToDate = user.sleepToDate;
