@@ -5,7 +5,6 @@ class UserRepository {
   }
 
   getUserData(id) {
-    // GRAB THE DATA FROM THE USER OBJECT IN THE USERS ARRAY WITH A MATCHING ID
     return this.userData.find(user => user.id === id);
   }
 
