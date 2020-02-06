@@ -11,11 +11,9 @@ class User {
     this.friends = userDataObj.friends;
     this.hydrationToDate = [];
     this.activityToDate = [];
-    this.sleepToDate = [];
   }
 
   getUsersFirstName() {
-    // RETURNS THE USERS FIRST NAME ONLY
     return this.name.split(' ')[0];
   }
 }

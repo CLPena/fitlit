@@ -17,7 +17,6 @@ class Hydration {
     }, 0);
     let avgDailyOunces = ouncesSum / dailyOunces.length
     return Math.round(avgDailyOunces);
-    // USE THE USER.hydrationToDate TO CALCULATE THE AVG FLUID OZ PER DAY OF ALL TIME
   }
 
   findDailyHydration(user, givenDate) {
@@ -26,17 +25,25 @@ class Hydration {
       return hydration.date === givenDate;
     });
     return matchingDate.numOunces;
-    // GO THROUGH THE USER.hydrationToDate ARRAY TO FIND THE OBJECT WITH MATCHING DATE
   }
 
   findWeeklyHydration(user, givenDate) {
     let hydrationToDate = user.hydrationToDate;
+
     let userHydration = hydrationToDate.filter(hydration => hydration.userID === this.userID);
-    let givenDateHydration = userHydration.find(hydration => hydration.date === givenDate)
+    // console.log('A', userHydration)
+
+    let givenDateHydration = userHydration.find(hydration => hydration.date === givenDate);
+    // console.log('B', givenDateHydration)
+
     let givenDateIndex = userHydration.indexOf(givenDateHydration);
+    // console.log('C', givenDateIndex)
+
     let weeklyHydration = userHydration.slice(givenDateIndex - 6, givenDateIndex + 1);
+
+    // console.log('D', weeklyHydration)
+
     return weeklyHydration;
-    // USE THE USER.hydrationToDate TO find How many fluid ounces of water consumed each day over the course of a week (7 days) - return the amount for each day
   }
 
   logHydration(user) {
@@ -44,7 +51,6 @@ class Hydration {
   }
 
 }
-
 
 if (typeof module !== 'undefined') {
   module.exports = Hydration;

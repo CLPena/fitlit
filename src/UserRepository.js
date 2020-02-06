@@ -5,13 +5,10 @@ class UserRepository {
   }
 
   getUserData(id) {
-    // GRAB THE DATA FROM THE USER OBJECT IN THE USERS ARRAY WITH A MATCHING ID
     return this.userData.find(user => user.id === id);
   }
 
   getAvgStepGoal() {
-    // GO THROUGH ALL USERS AND PULL THEIR STEP GOALS VALUE AND ADD THEM ALL TOGETHER, THEN DIVIDE THAT TOTAL BY THE NUMBER OF USERS
-    // MAY CREATE A LOCAL ARRAY TO STORE ^ INSIDE
     let sum = 0;
     let total = this.userData.length;
 

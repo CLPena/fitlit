@@ -3,12 +3,10 @@
   margin: 0;
   padding: 0;
 }
-
 body {
   background: #323A45;
   height: 850px;
 }
-
 header {
   color: skyblue;
   display: flex;
@@ -16,7 +14,6 @@ header {
   margin: 0 10%;
   padding: 1%;
 }
-
 main {
   display: grid;
   grid-gap: 10px;

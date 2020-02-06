@@ -1,39 +1,49 @@
 class Sleep {
-  constructor() {
-    // this.userID = userID;
-    // this.date = date;
-    // this.hoursSlept = hoursSlept;
-    // this.sleepQuality = sleepQuality;
+  constructor(userID, date, hoursSlept, sleepQuality) {
+    this.userID = userID;
+    this.date = date;
+    this.hoursSlept = hoursSlept;
+    this.sleepQuality = sleepQuality;
+    this.sleepToDate = [];
   }
 
-  calculateAvgSleepHours() {
-    //
+  getAvgHoursSlept() {
+    let avg = this.sleepToDate.reduce((acc, date) => {
+      return acc + date.hoursSlept / this.sleepToDate.length;
+    }, 0);
+    return Math.round(avg);
   }
 
-  findDailySleepHours() {
-    // HOURS SLEPT FOR SPECIFIC DAY
+  getAvgSleepQuality() {
+    let avg = this.sleepToDate.reduce((acc, date) => {
+      return acc + date.sleepQuality / this.sleepToDate.length;
+    }, 0);
+    return Math.round(avg);
   }
 
-  findWeeklySleepHours() {
-    // HOURS SLEPT EACH DAY OVER THE COURSE OF A GIVEN WEEK
+  get(date) {
+    return this.sleepToDate.find(day => day.date === date);
   }
 
-  findWeeklySleepQuality() {
-    // SLEEP QUALITY EACH DAY OVER THE COURSE OF A GIVEN WEEK
+  getHoursSleptOn(date) {
+    return this.get(date).hoursSlept;
   }
 
-  findDailySleepQuality() {
-    // FIND THE SLEEP QUALITY FOR A SPECIFIC DAY
+  getSleepQualityOn(date) {
+    return this.get(date).sleepQuality;
   }
 
-  calculateAvgSleepQuality() {
-    // THE AVG SLEEP QUALITY PER DAY FOR ALL TIME
+  getTheWeekOf(date) {
+    let dailyData = this.sleepToDate.filter(data => data.userID === this.userID);
+    let currentDate = dailyData.indexOf(this.get(date));
+    let weeklyData = dailyData.slice(currentDate - 6, currentDate + 1);
+    return weeklyData;
+  }
+
+  log(sleepData) {
+    this.sleepToDate.push(sleepData);
   }
 }
-
-
-
-
 
 if (typeof module !== 'undefined') {
   module.exports = Sleep;
