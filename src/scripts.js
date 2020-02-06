@@ -1,6 +1,6 @@
 window.addEventListener('load', getUserInfo);
 
-var wrapper = document.querySelector('body');
+let wrapper = document.querySelector('body');
 
 function getUserInfo() {
   let userRepository = new UserRepository(userData);

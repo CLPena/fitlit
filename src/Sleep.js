@@ -4,53 +4,46 @@ class Sleep {
     this.date = date;
     this.hoursSlept = hoursSlept;
     this.sleepQuality = sleepQuality;
+    this.sleepToDate = [];
   }
 
-  calculateAvgSleepHours(user) {
-    let sleepToDate = user.sleepToDate;
-    let dailySleep = [];
-    sleepToDate.forEach(sleep => {
-      dailySleep.push(sleep.hoursSlept)
-    });
-    let sum = dailySleep.reduce((acc, hours) => {
-      return acc + hours;
-    },0);
-    let avgHours = sum / dailySleep.length;
-    return Math.round(avgHours);
+  getAvgHoursSlept() {
+    let avg = this.sleepToDate.reduce((acc, date) => {
+      return acc + date.hoursSlept / this.sleepToDate.length;
+    }, 0);
+    return Math.round(avg);
   }
 
-  findDailySleepHours(user, givenDate) {
-    let sleepToDate = user.sleepToDate;
-    let matchingDate = sleepToDate.find(hours => {
-      return hours.date === givenDate;
-    });
-    return matchingDate.hoursSlept;
+  getAvgSleepQuality() {
+    let avg = this.sleepToDate.reduce((acc, date) => {
+      return acc + date.sleepQuality / this.sleepToDate.length;
+    }, 0);
+    return Math.round(avg);
   }
 
-  findWeeklySleepHours() {
-    // HOURS SLEPT EACH DAY OVER THE COURSE OF A GIVEN WEEK
+  get(date) {
+    return this.sleepToDate.find(day => day.date === date);
   }
 
-  logSleep(user) {
-    user.sleepToDate.push(this);
+  getHoursSleptOn(date) {
+    return this.get(date).hoursSlept;
   }
 
-  findWeeklySleepQuality() {
-    // SLEEP QUALITY EACH DAY OVER THE COURSE OF A GIVEN WEEK
+  getSleepQualityOn(date) {
+    return this.get(date).sleepQuality;
   }
 
-  findDailySleepQuality() {
-    // FIND THE SLEEP QUALITY FOR A SPECIFIC DAY
+  getTheWeekOf(date) {
+    let dailyData = this.sleepToDate.filter(data => data.userID === this.userID);
+    let currentDate = dailyData.indexOf(this.get(date));
+    let weeklyData = dailyData.slice(currentDate - 6, currentDate + 1);
+    return weeklyData;
   }
 
-  calculateAvgSleepQuality() {
-    // THE AVG SLEEP QUALITY PER DAY FOR ALL TIME
+  log(sleepData) {
+    this.sleepToDate.push(sleepData);
   }
 }
-
-
-
-
 
 if (typeof module !== 'undefined') {
   module.exports = Sleep;
