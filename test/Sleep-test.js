@@ -48,6 +48,26 @@ describe('Sleep', function() {
     expect(sleep).to.be.an.instanceof(Sleep);
   });
 
+  it('should have an id', function() {
+    expect(sleep.userID).to.equal(1);
+  });
+
+  it('should have a date', function() {
+    expect(sleep.date).to.equal('2019/06/15');
+  });
+
+  it('should track the number of hours slept', function() {
+    expect(sleep.hoursSlept).to.equal(6.1);
+  });
+
+  it('should track a sleep quality value', function() {
+    expect(sleep.sleepQuality).to.equal(2.2);
+  });
+
+  it('should accept an array of all sleep data to date', function() {
+    expect(sleep.sleepToDate).to.deep.equal([sleep, sleep1, sleep2, sleep3, sleep4, sleep5, sleep6, sleep7, sleep8, sleep9, sleep10]);
+  });
+
   it('should find the average hours a user sleeps each night', function() {
     expect(sleep.getAvgHoursSlept()).to.equal(7);
   });
