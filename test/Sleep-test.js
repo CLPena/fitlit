@@ -73,7 +73,7 @@ describe('Sleep', function() {
   });
 
   it('should find the average sleep quality for a user each night', function() {
-    expect(sleep.getAvgSleepQuality()).to.equal(3);
+    expect(sleep.getSingleUserAvgSleepQuality()).to.equal(3);
   });
 
   it('should find how many hours a user slept on a given day', function() {
@@ -94,5 +94,9 @@ describe('Sleep', function() {
     expect(sleep.getTheWeekOf("2019/06/23").length).to.equal(7);
     expect(sleep.getTheWeekOf("2019/06/24").length).to.equal(7);
     expect(sleep.getTheWeekOf("2019/06/25").length).to.equal(7);
+  });
+
+  it('should find the average sleep quality for all users', function() {
+    expect(sleep.getAvgSleepQuality()).to.equal(3);
   });
 });
