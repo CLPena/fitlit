@@ -30,7 +30,7 @@ describe('User', function() {
     expect(userRepository.userData[2]).to.equal(user3);
   });
 
-  it('should return a user\'s data given its id', function() {
+  it('should return user\'s data given its id', function() {
     expect(userRepository.getUserData(1)).to.equal(user1)
   });
 

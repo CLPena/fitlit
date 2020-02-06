@@ -80,7 +80,7 @@ describe('Sleep', function() {
     expect(sleep.getHoursSleptOn('2019/06/15')).to.equal(6.1);
   });
 
-  it('should find a users sleep quality on a given day', function() {
+  it('should find user\'s sleep quality on a given day', function() {
     expect(sleep.getSleepQualityOn('2019/06/21')).to.equal(3.5);
   });
 
@@ -90,7 +90,7 @@ describe('Sleep', function() {
     expect(sleep.getTheWeekOf("2019/06/25").length).to.equal(7);
   });
 
-  it('should find a users sleep quality each day in a given week)', function() {
+  it('should find user\'s sleep quality each day in a given week)', function() {
     expect(sleep.getTheWeekOf("2019/06/23").length).to.equal(7);
     expect(sleep.getTheWeekOf("2019/06/24").length).to.equal(7);
     expect(sleep.getTheWeekOf("2019/06/25").length).to.equal(7);

@@ -20,6 +20,18 @@ describe('Hydration', function() {
     expect(hydration).to.be.an.instanceof(Hydration);
   });
 
+  it('should have an id', function() {
+    expect(hydration.userID).to.equal(1);
+  });
+
+  it('should have a date', function() {
+    expect(hydration.date).to.equal('2019/06/15');
+  });
+
+  it('should track the number of ounces drank', function() {
+    expect(hydration.numOunces).to.equal(37);
+  });
+
   describe('Hydration Records', function() {
     let hydration1;
     let hydration2;
@@ -33,6 +45,7 @@ describe('Hydration', function() {
     let hydration10;
     let hydration11;
     let hydration12;
+
     beforeEach(function() {
       hydration1 = new Hydration(1, "2019/06/15", 37);
       hydration2 = new Hydration(1, "2019/06/16", 75);
