@@ -68,12 +68,16 @@ describe('Sleep', function() {
     expect(sleep.sleepToDate).to.deep.equal([sleep, sleep1, sleep2, sleep3, sleep4, sleep5, sleep6, sleep7, sleep8, sleep9, sleep10]);
   });
 
+  it.skip('should accept an array of each user\'s avg sleep quality', function() {
+    expect(sleep.usersAvgSleepQuality.length).to.equal(11);
+  });
+
   it('should find the average hours a user sleeps each night', function() {
     expect(sleep.getAvgHoursSlept()).to.equal(7);
   });
 
-  it('should find the average sleep quality for a user each night', function() {
-    expect(sleep.getSingleUserAvgSleepQuality()).to.equal(3);
+  it('should find a user\'s average sleep quality per day', function() {
+    expect(sleep.getAvgSleepQuality()).to.equal(3);
   });
 
   it('should find how many hours a user slept on a given day', function() {
@@ -85,22 +89,18 @@ describe('Sleep', function() {
   });
 
   it('should find how many hours a user slept each day in a given week)', function() {
-    expect(sleep.getTheWeekOf("2019/06/23").length).to.equal(7);
-    expect(sleep.getTheWeekOf("2019/06/24").length).to.equal(7);
-    expect(sleep.getTheWeekOf("2019/06/25").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/23").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/24").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/25").length).to.equal(7);
   });
 
   it('should find user\'s sleep quality each day in a given week)', function() {
-    expect(sleep.getTheWeekOf("2019/06/23").length).to.equal(7);
-    expect(sleep.getTheWeekOf("2019/06/24").length).to.equal(7);
-    expect(sleep.getTheWeekOf("2019/06/25").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/23").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/24").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/25").length).to.equal(7);
   });
 
-  it('should find the average sleep quality for all users', function() {
-    expect(sleep.getAvgSleepQuality()).to.equal(3);
-  });
-
-  it('should find users who\'s avg sleep quality is greater than 3 for a given week', function() {
+  it.skip('should find users who\'s avg sleep quality is greater than 3 for a given week', function() {
     expect(sleep.getRestedUsers("2019/06/25")).to.deep.equal([sleep4, sleep6, sleep9]);
     expect(sleep.getRestedUsers("2019/06/21")).to.deep.equal([sleep1, sleep4, sleep6]);
   });
