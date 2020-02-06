@@ -56,6 +56,10 @@ describe('Sleep', function() {
       sleep10.logSleep(user);
     });
 
+    it('should calculate the average hours slept a night', function(){
+    expect(sleep.calculateAvgSleepHours(user)).to.equal(7);
+    });
+
     it('should find how many hours a user slept on a given day', function() {
     expect(sleep.findDailySleepHours(user, "2019/06/15")).to.equal(6.1);
     });
