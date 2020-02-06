@@ -14,9 +14,16 @@ class Sleep {
     return Math.round(avg);
   }
 
-  getAvgSleepQuality() {
+  getSingleUserAvgSleepQuality() {
     let avg = this.sleepToDate.reduce((acc, date) => {
       return acc + date.sleepQuality / this.sleepToDate.length;
+    }, 0);
+    return Math.round(avg);
+  }
+
+  getAvgSleepQuality() {
+    let avg = this.sleepToDate.reduce((acc, user) => {
+      return acc += user.sleepQuality / this.sleepToDate.length;
     }, 0);
     return Math.round(avg);
   }
