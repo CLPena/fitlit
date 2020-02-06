@@ -15,7 +15,6 @@ class User {
   }
 
   getUsersFirstName() {
-    // RETURNS THE USERS FIRST NAME ONLY
     return this.name.split(' ')[0];
   }
 }
