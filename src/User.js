@@ -1,5 +1,3 @@
-// const Hydration = require('../src/Hydration');
-
 class User {
   constructor(userDataObj) {
     this.id = userDataObj.id;
