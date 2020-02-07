@@ -1,6 +1,7 @@
 window.addEventListener('load', loadInfo);
 
 let wrapper = document.querySelector('main');
+let body = document.querySelector('body');
 
 function loadInfo() {
   getUserInfo();
@@ -10,11 +11,11 @@ function loadInfo() {
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
   let user = new User(userData[0]);
-
+  body.insertAdjacentHTML('afterBegin',
+    `<header>
+      <h1>Welcome, <span>${user.getUsersFirstName()}</span>!<h1>
+    </header>`)
   wrapper.insertAdjacentHTML('afterBegin', `
-  <header>
-    <h1>Welcome, <span>${user.getUsersFirstName()}</span>!</h1>
-  </header>
     <section class='one'>
       <p>ADDRESS</p>
       <p class='user-data'>${user.address}</p>
