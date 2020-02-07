@@ -1,17 +1,15 @@
-window.addEventListener('load', getUserInfo);
+window.addEventListener('load', loadInfo);
 
-// need to go through hydration data, create a new hydration obj using each entry, and push all objects to user.hydrationToDate array
+let wrapper = document.querySelector('body');
+
+function loadInfo() {
+  getUserInfo();
+  // getHydrationInfo();
+}
 
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
   let user = new User(userData[0]);
-  let userHydrationData = hydrationData.filter(el => el.userID === user.id);
-  let userHydrationDataObjs = userHydrationData.map(el => {
-    return new Hydration(el.userID, el.date, el.numOunces)
-  });
-  user.hydrationToDate = user.hydrationToDate.concat(userHydrationDataObjs);
-  console.log(user.hydrationToDate);
-  let dailyHydration = user.hydrationToDate.find(el => el.date === "2019/06/28");
 
   wrapper.insertAdjacentHTML('beforeend', `
   <header>
@@ -30,15 +28,37 @@ function getUserInfo() {
       <p>FRIENDS</p>
       <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
     </section>
-    <section class='hydration-widget'>
-      <p>OUNCES OF WATER TODAY:</p>
-      <p class='user-data'>${dailyHydration.numOunces} OZ</p>
-      <p>OUNCES OF WATER THIS WEEK:</p>
-      <p class='user-data'>${dailyHydration.findWeeklyHydration(user, "2019/06/28")}</p>
-    </section>
   <main>
   `);
+  getHydrationInfo(user);
 }
 
-let wrapper = document.querySelector('body');
+function getHydrationInfo(user){
+  let userHydrationData = hydrationData.filter(el => el.userID === user.id);
+  let userHydrationDataObjs = userHydrationData.map(el => {
+    return new Hydration(el.userID, el.date, el.numOunces)
+  });
+  user.hydrationToDate = user.hydrationToDate.concat(userHydrationDataObjs);
+  let dailyHydration = user.hydrationToDate.find(el => el.date === "2019/06/28");
+  let weeklyHydration = dailyHydration.findWeeklyHydration(user, "2019/06/28");
+  let section1 = document.querySelector('one');
+
+  section1.insertAdjacentHTML('afterend', `
+    <section class='hydration-widget'>
+      <p>OUNCES OF WATER TODAY:</p>
+      <p class='user-data dailyHydrationSection'>${dailyHydration.numOunces} OZ</p>
+      <p>OUNCES OF WATER THIS WEEK:</p>
+      </section>
+  `)
+  let dailyHydrationSection = document.querySelector('dailyHydrationSection');
+
+  //
+  //
+  // weeklyHydration.forEach(el => {
+  //   dailyHydrationSection.insertAdjacentHTML('afterend',
+  //   `<p class='user-data'>DATE:${el.date}</p>
+  //   <p class='user-data'>OUNCES:${el.numOunces}</p>`
+  //   )
+  // })
+}
 //
