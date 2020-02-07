@@ -51,7 +51,7 @@ function createHydrationWidget(user, dailyHydration, weeklyHydration){
   )
 
   wrapper.insertAdjacentHTML('beforeEnd',
-    `<section class='three past-seven'>
+    `<section class='three'>
       <p class='ounces-of-water-today'>OUNCES OF WATER PAST 7 DAYS:</p>
       <div class='weekly-water'>
         <p class='water'>DATE: ${weeklyHydration[0].date}<p>
