@@ -9,9 +9,9 @@ class UserRepository {
   }
 
   getAvgStepGoal() {
-    let goals = 0;
-    this.userData.forEach(user => goals += user.dailyStepGoal);
-    return Math.round(goals / this.userData.length);
+    let sum = 0;
+    this.userData.forEach(user => sum += user.dailyStepGoal);
+    return Math.round(sum / this.userData.length);
   }
 
   getAvgSleepQuality(data) {

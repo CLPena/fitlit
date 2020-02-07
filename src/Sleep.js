@@ -11,7 +11,7 @@ class Sleep {
     let avg = this.sleepToDate.reduce((acc, date) => {
       return acc + date.hoursSlept / this.sleepToDate.length;
     }, 0);
-
+    
     return Math.round(avg);
   }
 
