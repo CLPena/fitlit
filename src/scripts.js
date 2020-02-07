@@ -51,52 +51,17 @@ function createHydrationWidget(user, dailyHydration, weeklyHydration){
     </section>`
   )
 
-  wrapper.insertAdjacentHTML('beforeEnd',
-    `<section class='three'>
-      <p>OUNCES OF WATER PAST 7 DAYS:</p>
-      <div class='weekly-water'>
-        <p>DATE: ${weeklyHydration[0].date}<p>
-        <p>${weeklyHydration[0].numOunces} OZ<p>
-      </div>
-      <div class='weekly-water'>
-        <p>DATE: ${weeklyHydration[1].date}<p>
-        <p>${weeklyHydration[1].numOunces} OZ<p>
-      </div>
-      <div class='weekly-water'>
-        <p>DATE: ${weeklyHydration[2].date}<p>
-        <p>${weeklyHydration[2].numOunces} OZ<p>
-      </div>
-      <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[3].date}<p>
-        <p class='water'>${weeklyHydration[3].numOunces} OZ<p>
-      </div>
-      <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[4].date}<p>
-        <p class='water'>${weeklyHydration[4].numOunces} OZ<p>
-      </div>
-      <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[5].date}<p>
-        <p class='water'>${weeklyHydration[5].numOunces} OZ<p>
-      </div>
-      <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[6].date}<p>
-        <p class='water'>${weeklyHydration[6].numOunces} OZ<p>
-      </div>
-      </section>`
-  )
-// function createCards(user, dailyHydration, weeklyHydration){
-//   weeklyHydration.forEach(el => {
-//     let date = el.date;
-//     let ounces = el.numOunces;
-//     wrapper.insertAdjacentHTML('beforeEnd',
-//       `<div class='weekly-water'>
-//         <p class='water'>DATE: ${date}<p>
-//         <p class='water'>${ounces} OZ<p>
-//       </div>`
-//       )
-//     }
-//   )
-//   return "";
-// }
+  let weeklyWater = weeklyHydration.map(el => {
+    return `<div class='weekly-water'>
+      <p>DATE: ${el.date}<p>
+      <p>${el.numOunces} OZ<p>
+    </div>`
+  })
 
+  wrapper.insertAdjacentHTML('beforeEnd',
+  `<section class='three'>
+    <p>OUNCES OF WATER PAST 7 DAYS:</p>
+    ${weeklyWater.join(" ")}
+  </section>`
+  )
 }
