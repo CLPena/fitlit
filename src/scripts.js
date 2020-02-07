@@ -22,6 +22,12 @@ function getUserInfo() {
       <p>FRIENDS</p>
       <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
     </section>
+    <section class='hydration-widget'>
+      <p>OUNCES OF WATER TODAY:</p>
+      <p class='user-data'></p>
+      <p>OUNCES OF WATER THIS WEEK:</p>
+      <p class='user-data'></p>
+    </section>
   <main>
   `);
 }
