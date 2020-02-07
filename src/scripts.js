@@ -25,6 +25,7 @@ function getUserInfo() {
     </section>
   `);
   getHydrationInfo(user);
+  getSleepInfo(user);
 }
 
 function getHydrationInfo(user){
@@ -59,4 +60,19 @@ function createHydrationWidget(user, dailyHydration, weeklyHydration){
     ${weeklyWater.join(" ")}
   </section>`
   )
+}
+
+function getSleepInfo(user) {
+  let userSleepData = sleepData.filter(el => el.userID === user.id);
+  let userSleepDataObjs = userSleepData.map(el => {
+    return new Sleep(el.userID, el.date, el.hoursSlept, el.sleepQuality, el.sleepToDate)
+  });
+  user.sleepToDate = user.sleepToDate.concat(userSleepDataObjs);
+  let dailySleep = user.sleepToDate.find(el => el.date === "2019/06/28");
+  let weeklySleep = dailySleep.getTheWeekOf("2019/06/28");
+  createSleepWidget(user);
+}
+
+function createSleepWidget(user) {
+
 }
