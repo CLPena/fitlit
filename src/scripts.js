@@ -1,11 +1,7 @@
-window.addEventListener('load', loadInfo);
+window.addEventListener('load', getUserInfo);
 
 let wrapper = document.querySelector('main');
 let body = document.querySelector('body');
-
-function loadInfo() {
-  getUserInfo();
-}
 
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
