@@ -56,5 +56,7 @@ p {
 span {
   font-weight: bold;
 }
-
+.weeklyWater {
+  border: 1px, solid, red;
+}
 /*  */

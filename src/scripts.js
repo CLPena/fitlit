@@ -11,11 +11,10 @@ function getUserInfo() {
   let userRepository = new UserRepository(userData);
   let user = new User(userData[0]);
 
-  wrapper.insertAdjacentHTML('beforeend', `
+  wrapper.insertAdjacentHTML('afterBegin', `
   <header>
     <h1>Welcome, <span>${user.getUsersFirstName()}</span>!</h1>
   </header>
-  <main>
     <section class='one'>
       <p>ADDRESS</p>
       <p class='user-data'>${user.address}</p>
@@ -28,7 +27,6 @@ function getUserInfo() {
       <p>FRIENDS</p>
       <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
     </section>
-  <main>
   `);
   getHydrationInfo(user);
 }
@@ -41,24 +39,28 @@ function getHydrationInfo(user){
   user.hydrationToDate = user.hydrationToDate.concat(userHydrationDataObjs);
   let dailyHydration = user.hydrationToDate.find(el => el.date === "2019/06/28");
   let weeklyHydration = dailyHydration.findWeeklyHydration(user, "2019/06/28");
-  let section1 = document.querySelector('one');
 
-  section1.insertAdjacentHTML('afterend', `
-    <section class='hydration-widget'>
+  wrapper.insertAdjacentHTML('beforeEnd',
+    `<section class='two'>
       <p>OUNCES OF WATER TODAY:</p>
-      <p class='user-data dailyHydrationSection'>${dailyHydration.numOunces} OZ</p>
-      <p>OUNCES OF WATER THIS WEEK:</p>
-      </section>
-  `)
-  let dailyHydrationSection = document.querySelector('dailyHydrationSection');
+      <p class='user-data'>${dailyHydration.numOunces} OZ</p>
+    </section>`
+  )
 
-  //
-  //
-  // weeklyHydration.forEach(el => {
-  //   dailyHydrationSection.insertAdjacentHTML('afterend',
-  //   `<p class='user-data'>DATE:${el.date}</p>
-  //   <p class='user-data'>OUNCES:${el.numOunces}</p>`
-  //   )
-  // })
+  wrapper.insertAdjacentHTML('beforeEnd',
+    `<section class='three'>
+      <p>OUNCES OF WATER THIS WEEK:</p>`
+  )
+  
+  weeklyHydration.forEach(el => {
+    let date = el.date;
+    let ounces = el.numOunces;
+    wrapper.insertAdjacentHTML('beforeEnd',
+        `<div class='weeklyWater'>
+          <p class='water'>DATE: ${date}<p>
+          <p class='water'>OUNCES: ${ounces}<p>
+        </div>
+      </section>`)
+    }
+  )
 }
-//
