@@ -9,10 +9,9 @@ function getUserInfo() {
   let userHydrationDataObjs = userHydrationData.map(el => {
     return new Hydration(el.userID, el.date, el.numOunces)
   });
-  user.hydrationToDate.push(userHydrationDataObjs);
-  let dailyHydration = userHydrationDataObjs.find(hydration => hydration.date === "2019/06/22");
-  // let test = dailyHydration.findWeeklyHydration(user, "2019/06/22");
-  // console.log(test);
+  user.hydrationToDate = user.hydrationToDate.concat(userHydrationDataObjs);
+  console.log(user.hydrationToDate);
+  let dailyHydration = user.hydrationToDate.find(el => el.date === "2019/06/28");
 
   wrapper.insertAdjacentHTML('beforeend', `
   <header>
@@ -33,9 +32,9 @@ function getUserInfo() {
     </section>
     <section class='hydration-widget'>
       <p>OUNCES OF WATER TODAY:</p>
-      <p class='user-data'> </p>
+      <p class='user-data'>${dailyHydration.numOunces} OZ</p>
       <p>OUNCES OF WATER THIS WEEK:</p>
-      <p class='user-data'> </p>
+      <p class='user-data'>${dailyHydration.findWeeklyHydration(user, "2019/06/28")}</p>
     </section>
   <main>
   `);
