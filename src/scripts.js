@@ -5,7 +5,6 @@ let body = document.querySelector('body');
 
 function loadInfo() {
   getUserInfo();
-  // getHydrationInfo();
 }
 
 function getUserInfo() {
