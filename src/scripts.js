@@ -53,34 +53,34 @@ function createHydrationWidget(user, dailyHydration, weeklyHydration){
 
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='three'>
-      <p class='ounces-of-water-today'>OUNCES OF WATER PAST 7 DAYS:</p>
+      <p>OUNCES OF WATER PAST 7 DAYS:</p>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p>DATE: ${weeklyHydration[0].date}<p>
+        <p>${weeklyHydration[0].numOunces} OZ<p>
       </div>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p>DATE: ${weeklyHydration[1].date}<p>
+        <p>${weeklyHydration[1].numOunces} OZ<p>
       </div>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p>DATE: ${weeklyHydration[2].date}<p>
+        <p>${weeklyHydration[2].numOunces} OZ<p>
       </div>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p class='water'>DATE: ${weeklyHydration[3].date}<p>
+        <p class='water'>${weeklyHydration[3].numOunces} OZ<p>
       </div>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p class='water'>DATE: ${weeklyHydration[4].date}<p>
+        <p class='water'>${weeklyHydration[4].numOunces} OZ<p>
       </div>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p class='water'>DATE: ${weeklyHydration[5].date}<p>
+        <p class='water'>${weeklyHydration[5].numOunces} OZ<p>
       </div>
       <div class='weekly-water'>
-        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
-        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+        <p class='water'>DATE: ${weeklyHydration[6].date}<p>
+        <p class='water'>${weeklyHydration[6].numOunces} OZ<p>
       </div>
       </section>`
   )
