@@ -1,6 +1,6 @@
 window.addEventListener('load', loadInfo);
 
-let wrapper = document.querySelector('body');
+let wrapper = document.querySelector('main');
 
 function loadInfo() {
   getUserInfo();
@@ -39,28 +39,37 @@ function getHydrationInfo(user){
   user.hydrationToDate = user.hydrationToDate.concat(userHydrationDataObjs);
   let dailyHydration = user.hydrationToDate.find(el => el.date === "2019/06/28");
   let weeklyHydration = dailyHydration.findWeeklyHydration(user, "2019/06/28");
+  createHydrationWidget(user, dailyHydration, weeklyHydration);
+}
 
+function createHydrationWidget(user, dailyHydration, weeklyHydration){
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='two'>
-      <p>OUNCES OF WATER TODAY:</p>
-      <p class='user-data'>${dailyHydration.numOunces} OZ</p>
+      <p class='ounces-of-water-today'>OUNCES OF WATER TODAY:</p>
+      <p class='ounces-of-water-today'>${dailyHydration.numOunces} OZ</p>
     </section>`
   )
 
   wrapper.insertAdjacentHTML('beforeEnd',
-    `<section class='three'>
-      <p>OUNCES OF WATER THIS WEEK:</p>`
+    `<section class='past-seven'>
+      <p class='ounces-of-water-today'>OUNCES OF WATER PAST 7 DAYS:</p>
+      ${createCards(user, dailyHydration, weeklyHydration)}
+      </section>`
   )
-  
+function createCards(user, dailyHydration, weeklyHydration){
   weeklyHydration.forEach(el => {
     let date = el.date;
     let ounces = el.numOunces;
     wrapper.insertAdjacentHTML('beforeEnd',
-        `<div class='weeklyWater'>
-          <p class='water'>DATE: ${date}<p>
-          <p class='water'>OUNCES: ${ounces}<p>
-        </div>
-      </section>`)
+      `<div class='weekly-water'>
+        <p class='water'>DATE: ${date}<p>
+        <p class='water'>${ounces} OZ<p>
+      </div>`
+      )
     }
   )
+  return "";
+
+}
+
 }
