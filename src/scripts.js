@@ -51,25 +51,51 @@ function createHydrationWidget(user, dailyHydration, weeklyHydration){
   )
 
   wrapper.insertAdjacentHTML('beforeEnd',
-    `<section class='past-seven'>
+    `<section class='three past-seven'>
       <p class='ounces-of-water-today'>OUNCES OF WATER PAST 7 DAYS:</p>
-      ${createCards(user, dailyHydration, weeklyHydration)}
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
+      <div class='weekly-water'>
+        <p class='water'>DATE: ${weeklyHydration[0].date}<p>
+        <p class='water'>${weeklyHydration[0].numOunces} OZ<p>
+      </div>
       </section>`
   )
-function createCards(user, dailyHydration, weeklyHydration){
-  weeklyHydration.forEach(el => {
-    let date = el.date;
-    let ounces = el.numOunces;
-    wrapper.insertAdjacentHTML('beforeEnd',
-      `<div class='weekly-water'>
-        <p class='water'>DATE: ${date}<p>
-        <p class='water'>${ounces} OZ<p>
-      </div>`
-      )
-    }
-  )
-  return "";
-
-}
+// function createCards(user, dailyHydration, weeklyHydration){
+//   weeklyHydration.forEach(el => {
+//     let date = el.date;
+//     let ounces = el.numOunces;
+//     wrapper.insertAdjacentHTML('beforeEnd',
+//       `<div class='weekly-water'>
+//         <p class='water'>DATE: ${date}<p>
+//         <p class='water'>${ounces} OZ<p>
+//       </div>`
+//       )
+//     }
+//   )
+//   return "";
+// }
 
 }
