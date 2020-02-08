@@ -26,23 +26,9 @@ class Sleep {
   }
 
   getMostRestedUserOn(date) {
-    // For a given day (identified by the date), find the users who slept the most number of hours (one or more if they tied)
-  // console.log(this.get(date))
-  let today = [];
-    this.sleepToDate.filter(user => user.date === date ? today.push(user.hoursSlept) : '');
-    today.sort()
-    console.log('today a: ', today)
-    let mostRested = today.shift();
-
-    console.log('today b: ', today)
-
-      today.filter(el => {
-        if (el !== mostRested) {
-          today.pop();
-          console.log(today)
-        }
-      });
-    return today;
+    let daily = this.sleepToDate.filter(el => el.date === date);
+    let mostRested = daily.sort((a, b) => b.hoursSlept - a.hoursSlept);
+    return mostRested.filter(el => mostRested[0].hoursSlept === el.hoursSlept);
   }
 
   getHoursSleptOn(date) {
