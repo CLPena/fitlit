@@ -5,13 +5,14 @@ class Sleep {
     this.hoursSlept = hoursSlept;
     this.sleepQuality = sleepQuality;
     this.sleepToDate = [];
+    this.avgSleepQuality = [];
   }
 
   getAvgHoursSlept() {
     let avg = this.sleepToDate.reduce((acc, date) => {
       return acc + date.hoursSlept / this.sleepToDate.length;
     }, 0);
-    
+
     return Math.round(avg);
   }
 
@@ -20,7 +21,28 @@ class Sleep {
       return acc + date.sleepQuality / this.sleepToDate.length;
     }, 0);
 
+    this.avgSleepQuality.push(Math.round(avg));
     return Math.round(avg);
+  }
+
+  getMostRestedUserOn(date) {
+    // For a given day (identified by the date), find the users who slept the most number of hours (one or more if they tied)
+  // console.log(this.get(date))
+  let today = [];
+    this.sleepToDate.filter(user => user.date === date ? today.push(user.hoursSlept) : '');
+    today.sort()
+    console.log('today a: ', today)
+    let mostRested = today.shift();
+
+    console.log('today b: ', today)
+
+      today.filter(el => {
+        if (el !== mostRested) {
+          today.pop();
+          console.log(today)
+        }
+      });
+    return today;
   }
 
   getHoursSleptOn(date) {

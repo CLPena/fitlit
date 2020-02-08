@@ -1,7 +1,6 @@
 class UserRepository {
   constructor(userData) {
     this.userData = userData;
-    // this.users = [];
   }
 
   getUserData(id) {
@@ -20,9 +19,6 @@ class UserRepository {
     return Math.round((sum / data.sleepToDate.length));
   }
 
-  getBestSleeper() {
-    // For a given day (identified by the date), find the users who slept the most number of hours (one or more if they tied)
-  }
 
   // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
 
