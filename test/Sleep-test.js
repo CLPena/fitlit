@@ -24,6 +24,7 @@ describe('Sleep', function() {
     sleep13 = new Sleep(1, '2019/06/16', 10, 2.7);
 
     sleep2 = new Sleep(1, '2019/06/17', 10.8, 3);
+    sleep2 = new Sleep(1, '2019/06/17', 10.8, 3);
     sleep3 = new Sleep(1, '2019/06/18', 4.1, 2.2);
     sleep4 = new Sleep(1, '2019/06/19', 5.4, 3.6);
     sleep5 = new Sleep(1, '2019/06/20', 9.6, 2.9);
@@ -97,20 +98,20 @@ describe('Sleep', function() {
   });
 
   it('should find how many hours a user slept each day in a given week)', function() {
-    expect(sleep.getHoursSleptTheWeekOf("2019/06/23").length).to.equal(7);
-    expect(sleep.getHoursSleptTheWeekOf("2019/06/24").length).to.equal(7);
-    expect(sleep.getHoursSleptTheWeekOf("2019/06/25").length).to.equal(7);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/23")).to.deep.equal([10.8, 4.1, 5.4, 9.6, 6.1, 5.1, 8.1]);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/24")).to.deep.equal([4.1, 5.4, 9.6, 6.1, 5.1, 8.1, 8.9]);
+    expect(sleep.getHoursSleptTheWeekOf("2019/06/25")).to.deep.equal([5.4, 9.6, 6.1, 5.1, 8.1, 8.9, 4.4]);
   });
 
   it('should find user\'s sleep quality each day in a given week)', function() {
-    expect(sleep.getHoursSleptTheWeekOf("2019/06/23").length).to.equal(7);
-    expect(sleep.getHoursSleptTheWeekOf("2019/06/24").length).to.equal(7);
-    expect(sleep.getHoursSleptTheWeekOf("2019/06/25").length).to.equal(7);
+    expect(sleep.getSleepQualityTheWeekOf("2019/06/23")).to.deep.equal([3, 2.2, 3.6, 2.9, 3.5, 2.2, 1.6]);
+    expect(sleep.getSleepQualityTheWeekOf("2019/06/24")).to.deep.equal([2.2, 3.6, 2.9, 3.5, 2.2, 1.6, 3.1]);
+    expect(sleep.getSleepQualityTheWeekOf("2019/06/25")).to.deep.equal([3.6, 2.9, 3.5, 2.2, 1.6, 3.1, 1.2]);
   });
 
-  it.skip('should find users who\'s avg sleep quality is greater than 3 for a given week', function() {
-    expect(sleep.getRestedUsers("2019/06/25")).to.deep.equal([sleep4, sleep6, sleep9]);
-    expect(sleep.getRestedUsers("2019/06/21")).to.deep.equal([sleep1, sleep4, sleep6]);
+  it('should find users who\'s avg sleep quality is greater than 3 for a given week', function() {
+    expect(sleep.getBestSleepersTheWeekOf("2019/06/25")).to.deep.equal([sleep4, sleep6, sleep9]);
+    expect(sleep.getBestSleepersTheWeekOf("2019/06/21")).to.deep.equal([sleep12, sleep4, sleep6]);
   });
 
   it('should find the user who slept the most hours on a given day', function() {
