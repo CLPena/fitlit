@@ -83,8 +83,11 @@ function createDailySleepWidget(user, dailySleep) {
       <p class='hours-slept-last-night'>${dailySleep.sleepQuality}</p>
       <p class='sleep-today'>ALL-TIME AVERAGE HOURS SLEPT:</p>
       <p class='hours-slept-last-night'>${dailySleep.getAvgHoursSlept()}</p>
+      <p class='sleep-today'>ALL-TIME AVERAGE SLEEP QUALITY:</p>
+      <p class='hours-slept-last-night'>${dailySleep.getAvgSleepQuality()}</p>
     </section>`
   )
+  console.log(user)
 }
 
 function createWeeklySleepWidget(user, weeklySleep) {
