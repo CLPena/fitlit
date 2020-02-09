@@ -28,13 +28,9 @@ class Hydration {
 
   findWeeklyHydration(user, givenDate) {
     let hydrationToDate = user.hydrationToDate;
-
     let userHydration = hydrationToDate.filter(hydration => hydration.userID === this.userID);
-
     let givenDateHydration = userHydration.find(hydration => hydration.date === givenDate);
-
     let givenDateIndex = userHydration.indexOf(givenDateHydration);
-
     let weeklyHydration = userHydration.slice(givenDateIndex - 6, givenDateIndex + 1);
     return weeklyHydration;
   }
