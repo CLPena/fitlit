@@ -92,6 +92,18 @@ function createDailySleepWidget(user, dailySleep) {
 }
 
 function createWeeklySleepWidget(user, weeklySleep) {
+  let weeklySleepHTML = weeklySleep.map(el => {
+    return `<div class='weekly-sleep'>
+      <p>DATE: ${el.date}<p>
+      <p>${el.hoursSlept} hours slept<p>
+    </div>`
+  })
 
+  wrapper.insertAdjacentHTML('beforeEnd',
+  `<section class='five'>
+    <p>OUNCES OF WATER PAST 7 DAYS:</p>
+    ${weeklySleepHTML.join(" ")}
+  </section>`
+  )
 }
 //   - [ ] For a user, their sleep data over the course of the latest week (hours slept and quality of sleep)
