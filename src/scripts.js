@@ -72,7 +72,6 @@ function getSleepInfo(user) {
   user.sleepToDate = user.sleepToDate.concat(userSleepDataObjs);
   let dailySleep = user.sleepToDate.find(el => el.date === "2019/06/28");
   let weeklySleep = dailySleep.getTheWeekOf("2019/06/28");
-  console.log(dailySleep);
   createDailySleepWidget(user, dailySleep);
   createWeeklySleepWidget(user, weeklySleep)
 }
