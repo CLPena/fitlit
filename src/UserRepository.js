@@ -13,12 +13,12 @@ class UserRepository {
     return Math.round(sum / this.userData.length);
   }
 
+  //For all users, the average sleep quality
   getAvgSleepQuality(data) {
     let sum = 0;
     data.sleepToDate.forEach(user => sum += user.sleepQuality);
     return Math.round((sum / data.sleepToDate.length));
   }
-
 
   // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
 
