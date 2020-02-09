@@ -65,11 +65,14 @@ function createHydrationWidget(user, dailyHydration, weeklyHydration){
 function getSleepInfo(user) {
   let userSleepData = sleepData.filter(el => el.userID === user.id);
   let userSleepDataObjs = userSleepData.map(el => {
-    return new Sleep(el.userID, el.date, el.hoursSlept, el.sleepQuality, el.sleepToDate)
+    let newSleep = new Sleep(el.userID, el.date, el.hoursSlept, el.sleepQuality);
+    newSleep.sleepToDate = newSleep.sleepToDate.concat(userSleepData);
+    return newSleep;
   });
   user.sleepToDate = user.sleepToDate.concat(userSleepDataObjs);
   let dailySleep = user.sleepToDate.find(el => el.date === "2019/06/28");
   let weeklySleep = dailySleep.getTheWeekOf("2019/06/28");
+  console.log(dailySleep);
   createDailySleepWidget(user, dailySleep);
   createWeeklySleepWidget(user, weeklySleep)
 }
@@ -87,7 +90,6 @@ function createDailySleepWidget(user, dailySleep) {
       <p class='hours-slept-last-night'>${dailySleep.getAvgSleepQuality()}</p>
     </section>`
   )
-  console.log(user)
 }
 
 function createWeeklySleepWidget(user, weeklySleep) {
