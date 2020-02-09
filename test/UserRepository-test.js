@@ -11,9 +11,35 @@ describe('User', function() {
   let userRepository;
 
   beforeEach(function() {
-    user1 = new User({id: 1, name: 'Luisa Hane', address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com', strideLength: 4.3, dailyStepGoal: 10000, friends: [16, 4, 8]});
-    user2 = new User({id: 2, name: 'Jarvis Considine', address: '30086 Kathryn Port, Ciceroland NE 0727330086 Kathryn Port, Ciceroland NE 07273', email: 'Dimitri.Bechtelar11@gmail.com', strideLength: 4.5, dailyStepGoal: 5000, friends: [9, 18, 24, 19]});
-    user3 = new User({id: 3, name: 'Herminia Witting', address: '85823 Bosco Fork, East Oscarstad MI 85126-5660', email: 'Elwin.Tromp@yahoo.com', strideLength: 4.4, dailyStepGoal: 5000, friends: [19, 11, 42, 33]});
+    user1 = new User({
+      id: 1,
+      name: 'Luisa Hane',
+      address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com',
+      strideLength: 4.3,
+      dailyStepGoal: 10000,
+      friends: [16, 4, 8]
+    });
+
+    user2 = new User({
+      id: 2,
+      name: 'Jarvis Considine',
+      address: '30086 Kathryn Port, Ciceroland NE 0727330086 Kathryn Port, Ciceroland NE 07273',
+      email: 'Dimitri.Bechtelar11@gmail.com',
+      strideLength: 4.5,
+      dailyStepGoal: 5000,
+      friends: [9, 18, 24, 19]
+    });
+
+    user3 = new User({
+      id: 3,
+      name: 'Herminia Witting',
+      address: '85823 Bosco Fork, East Oscarstad MI 85126-5660',
+      email: 'Elwin.Tromp@yahoo.com',
+      strideLength: 4.4,
+      dailyStepGoal: 5000,
+      friends: [19, 11, 42, 33]
+    });
+
     userRepository = new UserRepository([user1, user2, user3])
   });
 
@@ -38,6 +64,7 @@ describe('User', function() {
   it('should return the average step goal amongst all users', function() {
     expect(userRepository.getAvgStepGoal()).to.equal(6667);
   });
+
   describe('Sleep Data', function() {
     let sleep;
     let sleep1;
@@ -53,7 +80,12 @@ describe('User', function() {
 
     beforeEach(function() {
       sleep = new Sleep(1, '2019/06/15', 6.1, 2.2);
+
       sleep1 = new Sleep(1, '2019/06/16', 7, 4.7);
+      sleep11 = new Sleep(1, '2019/06/16', 3, 4.7);
+      sleep12 = new Sleep(1, '2019/06/16', 10, 4.7);
+      sleep13 = new Sleep(1, '2019/06/16', 6, 4.7);
+
       sleep2 = new Sleep(1, '2019/06/17', 10.8, 3);
       sleep3 = new Sleep(1, '2019/06/18', 4.1, 2.2);
       sleep4 = new Sleep(1, '2019/06/19', 5.4, 3.6);
@@ -65,6 +97,9 @@ describe('User', function() {
       sleep10 = new Sleep(1, '2019/06/25', 4.4, 1.2);
       sleep.log(sleep);
       sleep.log(sleep1);
+      sleep.log(sleep11);
+      sleep.log(sleep12);
+      sleep.log(sleep13);
       sleep.log(sleep2);
       sleep.log(sleep3);
       sleep.log(sleep4);
@@ -79,5 +114,7 @@ describe('User', function() {
     it('should find the average sleep quality for all users', function() {
       expect(userRepository.getAvgSleepQuality(sleep)).to.equal(3);
     });
+
+
   });
 })
