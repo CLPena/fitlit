@@ -8,7 +8,7 @@ class Activity {
     this.exceededStepGoal = [];
   }
 
-  getMilesWalked() {
+  getMilesWalked(date) {
     // return the miles a user has walked based on their number of steps (use their strideLength to help calculate this) 5280 ft in 1 mile / 4 = 1320 = 2640 steps , 937 leftover steps, 0.4 miles ====== 1.4 miles
   }
 
@@ -29,6 +29,8 @@ class Activity {
   getStairClimbingRecord() {
     // sort through all of the users activity objects and find the stair climbing record that is the highest
   }
+
+
 
   // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
 
