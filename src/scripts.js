@@ -95,13 +95,13 @@ function createWeeklySleepWidget(user, weeklySleep) {
   let weeklySleepHTML = weeklySleep.map(el => {
     return `<div class='weekly-sleep'>
       <p>DATE: ${el.date}<p>
-      <p>${el.hoursSlept} hours slept<p>
+      <p>${el.hoursSlept} hours slept | ${el.sleepQuality} quality<p>
     </div>`
   })
 
   wrapper.insertAdjacentHTML('beforeEnd',
   `<section class='five'>
-    <p>OUNCES OF WATER PAST 7 DAYS:</p>
+    <p>PAST 7 DAYS OF SLEEP:</p>
     ${weeklySleepHTML.join(" ")}
   </section>`
   )
