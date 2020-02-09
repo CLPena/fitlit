@@ -106,4 +106,3 @@ function createWeeklySleepWidget(user, weeklySleep) {
   </section>`
   )
 }
-//   - [ ] For a user, their sleep data over the course of the latest week (hours slept and quality of sleep)
