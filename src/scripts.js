@@ -96,4 +96,3 @@ function createWeeklySleepWidget(user, weeklySleep) {
 
 }
 //   - [ ] For a user, their sleep data over the course of the latest week (hours slept and quality of sleep)
-//   - [ ] For a user, their all-time average sleep quality and all-time average number of hours slept
