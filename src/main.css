@@ -17,7 +17,8 @@ main {
   display: grid;
   grid-gap: 10px;
   grid-template-areas:
-  "one two three";
+  "one two three"
+  "four five six";
   grid-template-rows: 2fr 2fr 2fr;
   height: 100%;
   margin: 0 10%;
@@ -25,7 +26,8 @@ main {
 }
 .one,
 .two,
-.three {
+.three,
+.four {
   background: #FFFFFF;
   border-radius: 1%;
   padding: 1%;
@@ -39,6 +41,9 @@ main {
 }
 .three {
   grid-area: three;
+}
+.four {
+  grid-area: four;
 }
 .user-name,
 p {

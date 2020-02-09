@@ -70,9 +70,19 @@ function getSleepInfo(user) {
   user.sleepToDate = user.sleepToDate.concat(userSleepDataObjs);
   let dailySleep = user.sleepToDate.find(el => el.date === "2019/06/28");
   let weeklySleep = dailySleep.getTheWeekOf("2019/06/28");
-  createSleepWidget(user);
+  createDailySleepWidget(user, dailySleep);
 }
 
-function createSleepWidget(user) {
+function createDailySleepWidget(user, dailySleep) {
+  wrapper.insertAdjacentHTML('beforeEnd',
+    `<section class='four'>
+      <p class='sleep-today'>HOURS SLEPT LAST NIGHT:</p>
+      <p class='hours-slept-last-night'>${dailySleep.hoursSlept} hours</p>
 
+    </section>`
+  )
 }
+
+//   - [ ] For a user, their sleep data for the latest day (hours slept and quality of sleep)
+//   - [ ] For a user, their sleep data over the course of the latest week (hours slept and quality of sleep)
+//   - [ ] For a user, their all-time average sleep quality and all-time average number of hours slept
