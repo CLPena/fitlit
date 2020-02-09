@@ -72,11 +72,11 @@ function getSleepInfo(user) {
   user.sleepToDate = user.sleepToDate.concat(userSleepDataObjs);
   let dailySleep = user.sleepToDate.find(el => el.date === "2019/06/28");
   let weeklySleep = dailySleep.getTheWeekOf("2019/06/28");
-  createDailySleepWidget(user, dailySleep);
-  createWeeklySleepWidget(user, weeklySleep)
+  createDailySleepWidget(dailySleep);
+  createWeeklySleepWidget(weeklySleep)
 }
 
-function createDailySleepWidget(user, dailySleep) {
+function createDailySleepWidget(dailySleep) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='four'>
       <p class='sleep-today'>HOURS SLEPT LAST NIGHT:</p>
@@ -91,7 +91,7 @@ function createDailySleepWidget(user, dailySleep) {
   )
 }
 
-function createWeeklySleepWidget(user, weeklySleep) {
+function createWeeklySleepWidget(weeklySleep) {
   let weeklySleepHTML = weeklySleep.map(el => {
     return `<div class='weekly-sleep'>
       <p>DATE: ${el.date}<p>
