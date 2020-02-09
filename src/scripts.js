@@ -36,17 +36,20 @@ function getHydrationInfo(user){
   user.hydrationToDate = user.hydrationToDate.concat(userHydrationDataObjs);
   let dailyHydration = user.hydrationToDate.find(el => el.date === "2019/06/28");
   let weeklyHydration = dailyHydration.findWeeklyHydration(user, "2019/06/28");
-  createHydrationWidget(dailyHydration, weeklyHydration);
+  createDailyHydrationWidget(dailyHydration);
+  createWeeklyHydrationWidget(weeklyHydration);
 }
 
-function createHydrationWidget(dailyHydration, weeklyHydration){
+function createDailyHydrationWidget(dailyHydration){
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='two'>
       <p class='ounces-of-water-today'>OUNCES OF WATER TODAY:</p>
       <p class='ounces-of-water-today'>${dailyHydration.numOunces} OZ</p>
     </section>`
   )
+}
 
+function createWeeklyHydrationWidget(weeklyHydration){
   let weeklyWater = weeklyHydration.map(el => {
     return `<div class='weekly-water'>
       <p>DATE: ${el.date}<p>
