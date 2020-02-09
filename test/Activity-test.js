@@ -37,5 +37,6 @@ describe('Activity', function() {
     expect(activity.flightsOfStairs).to.equal(16);
   });
 
-  
+  it('should return the miles a user has walked based on their number of steps')
+
 });
