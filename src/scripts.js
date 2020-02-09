@@ -78,7 +78,8 @@ function createDailySleepWidget(user, dailySleep) {
     `<section class='four'>
       <p class='sleep-today'>HOURS SLEPT LAST NIGHT:</p>
       <p class='hours-slept-last-night'>${dailySleep.hoursSlept} hours</p>
-
+      <p class='sleep-today'>SLEEP QUALITY LAST NIGHT:</p>
+      <p class='hours-slept-last-night'>${dailySleep.sleepQuality}</p>
     </section>`
   )
 }
