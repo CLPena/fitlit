@@ -45,8 +45,7 @@ class Activity {
       if (el.flightsOfStairs > acc) {
         acc = el.flightsOfStairs;
       }
-
-    return acc;
+      return acc;
     }, 0);
     return record;
   }
