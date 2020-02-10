@@ -3,6 +3,7 @@ const expect = chai.expect;
 const User = require('../src/User');
 const UserRepository = require('../src/UserRepository');
 const Sleep = require('../src/Sleep');
+const Activity = require('../src/Activity');
 
 describe('User', function() {
   let user1;
@@ -115,6 +116,33 @@ describe('User', function() {
       expect(userRepository.getAvgSleepQuality(sleep)).to.equal(3);
     });
 
+    describe('Activity Data', function() {
+      let activity1;
+      let activity2;
+      let activity3;
+      let activity4;
+      let activity5;
+      let activity6;
+      let activity7;
+      let activity8;
 
+      beforeEach(function() {
+        activity1 = new Activity(1, '2019/06/15', 3577, 140, 16);
+        activity2 = new Activity(1, '2019/06/16', 4294, 138, 10);
+        activity3 = new Activity(1, '2019/06/17', 7402, 116, 33);
+        activity4 = new Activity(1, '2019/06/18', 3545,  30, 16);
+        activity5 = new Activity(1, '2019/06/19', 4377, 140, 11);
+        activity6 = new Activity(1, '2019/06/20', 8573, 200, 18);
+        activity7 = new Activity(1, '2019/06/21', 6941, 180, 16);
+        activity8 = new Activity(1, '2019/06/22', 9841, 180, 16);
+
+        userRepository = new UserRepository([activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8]);
+      });
+
+      it('should find the last seven days of a given date', function() {
+        expect(userRepository.getTheWeekOf('2019/06/21')).to.deep.equal([activity1, activity2, activity3, activity4, activity5, activity6, activity7]);
+        expect(userRepository.getTheWeekOf('2019/06/22')).to.deep.equal([activity2, activity3, activity4, activity5, activity6, activity7, activity8]);
+      });
+    });
   });
 })
