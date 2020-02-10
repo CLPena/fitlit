@@ -29,14 +29,27 @@ class Activity {
     return Math.round(avg);
   }
 
-  compareStepGoal(goal) {
-    return this.numSteps >= goal ? `You reached your step goal of ${goal} today!` : `You did not reach your step goal of ${goal} today.`;
+  compareStepGoal(user, date) {
+    return this.date === date ? this.numSteps >= user.dailyStepGoal : 'Select which date you\'d like to view if goal was met';
   }
 
-  getStairClimbingRecord() {
-    // sort through all of the users activity objects and find the stair climbing record that is the highest
+  getExceededStepGoal(user, activities) {
+    return activities.reduce((acc, el) => {
+      el.numSteps >= user.dailyStepGoal ? acc.push(el.date) : '';
+      return acc;
+    }, []);
   }
 
+  getStairClimbingRecord(userData) {
+    let record = userData.reduce((acc, el) => {
+      if (el.flightsOfStairs > acc) {
+        acc = el.flightsOfStairs;
+      }
+      
+    return acc;
+    }, 0);
+    return record;
+  }
 
 
   // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
