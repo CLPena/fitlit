@@ -19,11 +19,11 @@ class Activity {
     return this.minutesActive;
   }
 
-  getWeeklyActiveMinutes(data, dates) {
-    let activityData = data.getTheWeekOf(dates);
+  getWeeklyActiveMinutes(data, date) {
+    let activityData = data.getTheWeekOf(date);
     let avg = 0;
-    activityData.forEach(date => {
-      avg += date.minutesActive / activityData.length;
+    activityData.forEach(el => {
+      avg += el.minutesActive / activityData.length;
     });
 
     return Math.round(avg);
@@ -45,7 +45,7 @@ class Activity {
       if (el.flightsOfStairs > acc) {
         acc = el.flightsOfStairs;
       }
-      
+
     return acc;
     }, 0);
     return record;
