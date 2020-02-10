@@ -20,6 +20,13 @@ class UserRepository {
     return Math.round((sum / data.sleepToDate.length));
   }
 
+  getTheWeekOf(date) {
+    let givenDate = this.userData.find(day => day.date === date);
+    let currentDate = this.userData.indexOf(givenDate);
+    let dailyData = this.userData;
+    let weeklyData = dailyData.slice(currentDate - 6, currentDate + 1);
+    return weeklyData;
+  }
   // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
 
   getDailyActivityAvgs() {
