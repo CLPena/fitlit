@@ -115,8 +115,12 @@ describe('Activity', function() {
   });
 
   it('should find if a user met their step goal for a given day', function() {
-    expect(activity1.compareStepGoal(user1.dailyStepGoal)).to.equal('You did not reach your step goal of 10000 today.');
-    expect(activity3.compareStepGoal(user2.dailyStepGoal)).to.equal('You reached your step goal of 5000 today!');
+    expect(activity1.compareStepGoal(user1, '2019/06/15')).to.equal(false);
+    expect(activity3.compareStepGoal(user2, '2019/06/17')).to.equal(true);
+  });
+
+  it('should find all days where a user exceeded their step goal', function() {
+    expect(activity1.getExceededStepGoal(user2, userRepository.userData)).to.deep.equal([activity3, activity6, activity7, activity8])
   });
 
 });
