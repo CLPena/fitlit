@@ -78,6 +78,9 @@ describe('User', function() {
     let sleep8;
     let sleep9;
     let sleep10;
+    let sleep11;
+    let sleep12;
+    let sleep13;
 
     beforeEach(function() {
       sleep = new Sleep(1, '2019/06/15', 6.1, 2.2);
