@@ -28,7 +28,7 @@ function getUserInfo() {
   getSleepInfo(user);
 }
 
-function getHydrationInfo(user){
+function getHydrationInfo(user) {
   let userHydrationData = hydrationData.filter(el => el.userID === user.id);
   let userHydrationDataObjs = userHydrationData.map(el => {
     return new Hydration(el.userID, el.date, el.numOunces)
@@ -40,7 +40,7 @@ function getHydrationInfo(user){
   createWeeklyHydrationWidget(weeklyHydration);
 }
 
-function createDailyHydrationWidget(dailyHydration){
+function createDailyHydrationWidget(dailyHydration) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='two'>
       <p class='ounces-of-water-today'>OUNCES OF WATER TODAY:</p>
@@ -49,7 +49,7 @@ function createDailyHydrationWidget(dailyHydration){
   )
 }
 
-function createWeeklyHydrationWidget(weeklyHydration){
+function createWeeklyHydrationWidget(weeklyHydration) {
   let weeklyWater = weeklyHydration.map(el => {
     return `<div class='weekly-water'>
       <p>DATE: ${el.date}<p>
@@ -58,10 +58,10 @@ function createWeeklyHydrationWidget(weeklyHydration){
   })
 
   wrapper.insertAdjacentHTML('beforeEnd',
-  `<section class='three'>
-    <p>OUNCES OF WATER PAST 7 DAYS:</p>
-    ${weeklyWater.join(" ")}
-  </section>`
+    `<section class='three'>
+      <p>OUNCES OF WATER PAST 7 DAYS:</p>
+      ${weeklyWater.join(" ")}
+    </section>`
   )
 }
 
@@ -103,9 +103,9 @@ function createWeeklySleepWidget(weeklySleep) {
   })
 
   wrapper.insertAdjacentHTML('beforeEnd',
-  `<section class='five'>
-    <p>PAST 7 DAYS OF SLEEP:</p>
-    ${weeklySleepHTML.join(" ")}
-  </section>`
+    `<section class='five'>
+      <p>PAST 7 DAYS OF SLEEP:</p>
+      ${weeklySleepHTML.join(" ")}
+    </section>`
   )
 }
