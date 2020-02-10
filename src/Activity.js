@@ -15,14 +15,12 @@ class Activity {
     return parseFloat(milesWalked.toFixed(2));
   }
 
-  // For a user, (identified by their userID) how many minutes were they active for a given day (specified by a date)?
   getDailyActiveMinutes(date) {
     return this.minutesActive;
   }
 
   getWeeklyActiveMinutes(data, dates) {
     let activityData = data.getTheWeekOf(dates);
-    console.log('this is it: ', activityData)
     let avg = 0;
     activityData.forEach(date => {
       avg += date.minutesActive / activityData.length;
@@ -31,9 +29,8 @@ class Activity {
     return Math.round(avg);
   }
 
-  compareStepGoal() {
-    // find user data with matching date and compare step goal to actual steps
-    // see if it exceeds step goal, if so push into exceeded step goal array
+  compareStepGoal(goal) {
+    return this.numSteps >= goal ? `You reached your step goal of ${goal} today!` : `You did not reach your step goal of ${goal} today.`;
   }
 
   getStairClimbingRecord() {
