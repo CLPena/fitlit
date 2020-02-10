@@ -8,17 +8,27 @@ class Activity {
     this.exceededStepGoal = [];
   }
 
-  getMilesWalked(date) {
-    // return the miles a user has walked based on their number of steps (use their strideLength to help calculate this) 5280 ft in 1 mile / 4 = 1320 = 2640 steps , 937 leftover steps, 0.4 miles ====== 1.4 miles
+  getMilesWalkedOn(userData, date) {
+    let stridesInAMile = 5280 / userData.strideLength;
+    let stepsInAMile = stridesInAMile * 2;
+    let milesWalked = this.numSteps / stepsInAMile;
+    return parseFloat(milesWalked.toFixed(2));
   }
 
-  getDailyActiveMinutes() {
-    // For a user, (identified by their userID) how many minutes were they active for a given day (specified by a date)?
-    return this.minutesActive // ??
+  // For a user, (identified by their userID) how many minutes were they active for a given day (specified by a date)?
+  getDailyActiveMinutes(date) {
+    return this.minutesActive;
   }
 
-  getWeeklyActiveMinutes() {
-    // For a user, how many minutes active did they average for a given week (7 days)?
+  getWeeklyActiveMinutes(data, dates) {
+    let activityData = data.getTheWeekOf(dates);
+    console.log('this is it: ', activityData)
+    let avg = 0;
+    activityData.forEach(date => {
+      avg += date.minutesActive / activityData.length;
+    });
+
+    return Math.round(avg);
   }
 
   compareStepGoal() {
