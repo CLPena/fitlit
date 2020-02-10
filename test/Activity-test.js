@@ -120,7 +120,11 @@ describe('Activity', function() {
   });
 
   it('should find all days where a user exceeded their step goal', function() {
-    expect(activity1.getExceededStepGoal(user2, userRepository.userData)).to.deep.equal([activity3, activity6, activity7, activity8])
+    expect(activity1.getExceededStepGoal(user2, userRepository.userData)).to.deep.equal([activity3.date, activity6.date, activity7.date, activity8.date])
+  });
+
+  it('should find a users all time stair climbing record', function() {
+    expect(activity1.getStairClimbingRecord(userRepository.userData)).to.equal(33);
   });
 
 });
