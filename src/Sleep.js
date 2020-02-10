@@ -25,7 +25,7 @@ class Sleep {
 
     this.avgSleepQuality.push(Math.round(avg));
     return Math.round(avg);
-    };
+  }
 
   //For a user, how many hours they slept for a specific day (identified by a date)
   getHoursSleptOn(date) {
