@@ -114,4 +114,9 @@ describe('Activity', function() {
     expect(activity1.getWeeklyActiveMinutes(userRepository, '2019/06/22')).to.equal(126);
   });
 
+  it('should find if a user met their step goal for a given day', function() {
+    expect(activity1.compareStepGoal(user1.dailyStepGoal)).to.equal('You did not reach your step goal of 10000 today.');
+    expect(activity3.compareStepGoal(user2.dailyStepGoal)).to.equal('You reached your step goal of 5000 today!');
+  });
+
 });
