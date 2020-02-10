@@ -57,11 +57,11 @@ describe('User', function() {
     expect(user.getUsersFirstName()).to.equal('Luisa');
   });
 
-  // it('should keep track of hydration to date', function() {
-  //   let hydration1 = new Hydration(1, "2019/06/15", 37);
-  //   let hydration2 = new Hydration(1, "2019/06/16", 75);
-  //   hydration1.logHydration(user);
-  //   hydration2.logHydration(user)
-  //   expect(user.hydrationToDate.length).to.equal(2);
-  // });
+  it('should keep track of hydration to date', function() {
+    let hydration1 = new Hydration(1, "2019/06/15", 37);
+    let hydration2 = new Hydration(1, "2019/06/16", 75);
+    hydration1.logHydration(user);
+    hydration2.logHydration(user)
+    expect(user.hydrationToDate.length).to.equal(2);
+  });
 })
