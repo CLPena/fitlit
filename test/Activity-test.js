@@ -16,6 +16,7 @@ describe('Activity', function() {
   let activity5;
   let activity6;
   let activity7;
+  let activity8;
 
   beforeEach(function() {
     user1 = new User({
@@ -54,8 +55,10 @@ describe('Activity', function() {
     activity5 = new Activity(1, '2019/06/19', 4377, 140, 11);
     activity6 = new Activity(1, '2019/06/20', 8573, 200, 18);
     activity7 = new Activity(1, '2019/06/21', 6941, 180, 16);
+    activity8 = new Activity(1, '2019/06/22', 9841, 80, 16);
 
-    userRepository = new UserRepository([activity1, activity2, activity3, activity4, activity5, activity6, activity7]);
+
+    userRepository = new UserRepository([activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8]);
   });
 
   it('should be a function', function() {
@@ -107,7 +110,8 @@ describe('Activity', function() {
   });
 
   it('should find how many minutes active a user averaged for a given week', function() {
-    expect(activty1.getWeeklyActiveMinutes()).to.equal();
+    expect(activity1.getWeeklyActiveMinutes(userRepository, '2019/06/21')).to.equal(135);
+    expect(activity1.getWeeklyActiveMinutes(userRepository, '2019/06/22')).to.equal(126);
   });
 
 });
