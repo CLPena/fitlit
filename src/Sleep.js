@@ -65,7 +65,6 @@ class Sleep {
         return day;
       }
     });
-    console.log('bestSleepers', bestSleepers)
     return bestSleepers;
   }
 

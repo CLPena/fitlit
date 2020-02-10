@@ -8,28 +8,48 @@ class Activity {
     this.exceededStepGoal = [];
   }
 
-  getMilesWalked(date) {
-    // return the miles a user has walked based on their number of steps (use their strideLength to help calculate this) 5280 ft in 1 mile / 4 = 1320 = 2640 steps , 937 leftover steps, 0.4 miles ====== 1.4 miles
+  getMilesWalkedOn(userData, date) {
+    let stridesInAMile = 5280 / userData.strideLength;
+    let stepsInAMile = stridesInAMile * 2;
+    let milesWalked = this.numSteps / stepsInAMile;
+    return parseFloat(milesWalked.toFixed(2));
   }
 
-  getDailyActiveMinutes() {
-    // For a user, (identified by their userID) how many minutes were they active for a given day (specified by a date)?
-    return this.minutesActive // ??
+  getDailyActiveMinutes(date) {
+    return this.minutesActive;
   }
 
-  getWeeklyActiveMinutes() {
-    // For a user, how many minutes active did they average for a given week (7 days)?
+  getWeeklyActiveMinutes(data, date) {
+    let activityData = data.getTheWeekOf(date);
+    let avg = 0;
+    activityData.forEach(el => {
+      avg += el.minutesActive / activityData.length;
+    });
+
+    return Math.round(avg);
   }
 
-  compareStepGoal() {
-    // find user data with matching date and compare step goal to actual steps
-    // see if it exceeds step goal, if so push into exceeded step goal array
+  compareStepGoal(user, date) {
+    return this.date === date ? this.numSteps >= user.dailyStepGoal : 'Select which date you\'d like to view if goal was met';
   }
 
-  getStairClimbingRecord() {
-    // sort through all of the users activity objects and find the stair climbing record that is the highest
+  getExceededStepGoal(user, activities) {
+    return activities.reduce((acc, el) => {
+      el.numSteps >= user.dailyStepGoal ? acc.push(el.date) : '';
+      return acc;
+    }, []);
   }
 
+  getStairClimbingRecord(userData) {
+    let record = userData.reduce((acc, el) => {
+      if (el.flightsOfStairs > acc) {
+        acc = el.flightsOfStairs;
+      }
+
+    return acc;
+    }, 0);
+    return record;
+  }
 
 
   // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
