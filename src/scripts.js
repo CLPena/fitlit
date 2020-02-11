@@ -125,7 +125,7 @@ function getActivityInfo(user) {
 function createDailyActivityWidget(dailyActivity, user) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='six'>
-      <p class='activity-today'>TODAY:</p>
+      <p class='activity-today'>ACTIVITY TODAY:</p>
       <p class='activity-today'>STEPS: ${dailyActivity.numSteps}</p>
       <p class=activity-today'>MINUTES ACTIVE: ${dailyActivity.minutesActive}</p>
       <p class=activity-today'>MILES: ${dailyActivity.getMilesWalkedOn(user)}</p>
