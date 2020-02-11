@@ -117,7 +117,6 @@ function getActivityInfo(user) {
   let userActivityDataObjs = activityData.filter(el => el.userID === user.id).map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
-  let userActivityToday = userActivityDataObjs.filter(el => el.date === "2019/06/28");
   user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
   let dailyUserActivity = user.activityToDate.find(el => el.date === "2019/06/28");
   let allUserActivityTodayDataObjs = activityData.filter(el => el.date === "2019/06/28").map(el => {
