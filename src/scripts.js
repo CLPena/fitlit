@@ -122,16 +122,16 @@ function getActivityInfo(user) {
   let allUserActivityTodayDataObjs = activityData.filter(el => el.date === "2019/06/28").map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
-  handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user)
+  handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user, userActivityDataObjs)
 }
 
-function handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user) {
+function handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user, userActivityDataObjs) {
   let totalActiveMinsAvg = getActiveMinutesInfo(allUserActivityTodayDataObjs);
   let totalStepsAvg = getStepsInfo(allUserActivityTodayDataObjs);
   let totalFlightsAvg = getFlightsInfo(allUserActivityTodayDataObjs);
   let totalMilesAvg = getMilesWalkedInfo(allUserActivityTodayDataObjs, user);
   createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, totalStepsAvg, totalFlightsAvg, totalMilesAvg);
-  // createWeeklyActivityWidget();
+  createWeeklyActivityWidget(userActivityDataObjs);
 }
 
 function getActiveMinutesInfo(allUserActivityTodayDataObjs) {
@@ -187,20 +187,23 @@ function createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, 
   )
 }
 
-// function createWeeklyActivityWidget(weeklyActivity) {
-//   let weeklyActivity = weeklyHydration.map(el => {
-//     return `<div class='weekly-water'>
-//       <p>DATE: ${el.date}<p>
-//       <p>${el.numOunces} OZ<p>
-//     </div>`
-//   })
-//   wrapper.insertAdjacentHTML('beforeEnd',
-//     `<section class='three'>
-//       <p>OUNCES OF WATER PAST 7 DAYS:</p>
-//       ${weeklyWater.join(" ")}
-//     </section>`
-//   )
-// }
-// Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
+function createWeeklyActivityWidget(userActivityDataObjs) {
+  let givenDate = userActivityDataObjs.find(day => day.date === "2019/06/28");
+  let currentDate = userActivityDataObjs.indexOf(givenDate);
+  let weeklyData = userActivityDataObjs.slice(currentDate - 6, currentDate + 1);
 
-  // - [ ] For a user, a weekly view of their step count, flights of stairs climbed, and minutes active
+  let weeklyActivity = weeklyData.map(el => {
+    return `
+    <div class='weekly-activity'>
+      <p>DATE: ${el.date}</p>
+      <p>STEP COUNT: ${el.numSteps} | FLIGHTS OF STAIRS: ${el.flightsOfStairs} | MINS ACTIVE: ${el.minutesActive}</p>
+    </div>
+    `
+  });
+    wrapper.insertAdjacentHTML('beforeEnd',
+      `<section class='seven'>
+        <p>ACTIVITY PAST 7 DAYS:</p>
+        ${weeklyActivity.join(" ")}
+      </section>`
+    )
+}
