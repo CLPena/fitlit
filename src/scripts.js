@@ -90,9 +90,9 @@ function createDailySleepWidget(dailySleep) {
       <p class='hours-slept-last-night'>${dailySleep.hoursSlept} hours</p>
       <p class='sleep-today'>SLEEP QUALITY LAST NIGHT:</p>
       <p class='hours-slept-last-night'>${dailySleep.sleepQuality}</p>
-      <p class='sleep-today'>ALL-TIME AVERAGE HOURS SLEPT:</p>
+      <p class='sleep-today'>YOUR AVERAGE HOURS SLEPT:</p>
       <p class='hours-slept-last-night'>${dailySleep.getAvgHoursSlept()}</p>
-      <p class='sleep-today'>ALL-TIME AVERAGE SLEEP QUALITY:</p>
+      <p class='sleep-today'>YOUR AVERAGE SLEEP QUALITY:</p>
       <p class='hours-slept-last-night'>${dailySleep.getAvgSleepQuality()}</p>
     </section>`
   )
@@ -105,10 +105,13 @@ function createWeeklySleepWidget(weeklySleep) {
       <p>${el.hoursSlept} hours slept | ${el.sleepQuality} quality<p>
     </div>`
   })
+  let nightsOverEight = weeklySleep.filter(el => el.hoursSlept >= 8);
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='five'>
       <p>PAST 7 DAYS OF SLEEP:</p>
       ${weeklySleepHTML.join(" ")}
+      <p>NIGHTS WITH OVER 8 HOURS</p>
+      <p>${nightsOverEight.length}</p>
     </section>`
   )
 }
