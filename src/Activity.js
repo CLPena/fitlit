@@ -62,11 +62,11 @@ class Activity {
     return matchingDate.flightsOfStairs;
   }
 
-  getStepsTakenForDate(userData, givenDate) {
+  getStepsTakenForDate(user, givenDate) {
     // go through userData and find the obj with matching date
   }
 
-  getActiveMinutesForDate(userData, givenDate) {
+  getActiveMinutesForDate(user, givenDate) {
     // go through userData and find the obj with matching date
   }
 }
