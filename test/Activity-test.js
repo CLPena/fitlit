@@ -135,8 +135,12 @@ describe('Activity', function() {
     expect(activity1.getStairClimbingRecord(userRepository.userData)).to.equal(33);
   });
 
-  it.only('should find stairs climbed for a given date', function() {
+  it('should find stairs climbed for a given date', function() {
     expect(activity1.getStairsClimbedForDate(user1, '2019/06/16')).to.equal(10);
+  })
+
+  it('should find steps taken for a given date', function() {
+    expect(activity1.getStepsTakenForDate(user1, '2019/06/16')).to.equal(4294);
   })
 
 });
