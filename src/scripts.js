@@ -131,6 +131,7 @@ function handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, us
   let totalFlightsAvg = getFlightsInfo(allUserActivityTodayDataObjs);
   let totalMilesAvg = getMilesWalkedInfo(allUserActivityTodayDataObjs, user);
   createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, totalStepsAvg, totalFlightsAvg, totalMilesAvg);
+  // createWeeklyActivityWidget();
 }
 
 function getActiveMinutesInfo(allUserActivityTodayDataObjs) {
@@ -185,6 +186,21 @@ function createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, 
     </section>`
   )
 }
+
+// function createWeeklyActivityWidget(weeklyActivity) {
+//   let weeklyActivity = weeklyHydration.map(el => {
+//     return `<div class='weekly-water'>
+//       <p>DATE: ${el.date}<p>
+//       <p>${el.numOunces} OZ<p>
+//     </div>`
+//   })
+//   wrapper.insertAdjacentHTML('beforeEnd',
+//     `<section class='three'>
+//       <p>OUNCES OF WATER PAST 7 DAYS:</p>
+//       ${weeklyWater.join(" ")}
+//     </section>`
+//   )
+// }
 // Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
 
   // - [ ] For a user, a weekly view of their step count, flights of stairs climbed, and minutes active
