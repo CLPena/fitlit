@@ -122,6 +122,10 @@ function getActivityInfo(user) {
   let allUserActivityTodayDataObjs = activityData.filter(el => el.date === "2019/06/28").map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
+  handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user)
+}
+
+function handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user) {
   let totalActiveMinsAvg = getActiveMinutesInfo(allUserActivityTodayDataObjs);
   let totalStepsAvg = getStepsInfo(allUserActivityTodayDataObjs);
   let totalFlightsAvg = getFlightsInfo(allUserActivityTodayDataObjs);
