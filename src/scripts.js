@@ -116,6 +116,14 @@ function getActivityInfo(user) {
   let userActivityDataObjs = userActivityData.map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
+  let userActivityToday = activityData.filter(el => el.date === "2019/06/28");
+
+  let minutesActiveToday = userActivityToday.reduce((acc, number) => {
+    acc += number.minutesActive;
+    return acc;
+  }, 0);
+  let minutesActiveAvgToday = minutesActiveToday / userActivityToday.length;
+  // console.log(minutesActiveAvgToday); ROUND THIS
   user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
   let dailyActivity = user.activityToDate.find(el => el.date === "2019/06/28");
   createDailyActivityWidget(dailyActivity, user);
