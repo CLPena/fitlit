@@ -8,8 +8,8 @@ class Activity {
     this.exceededStepGoal = [];
   }
 
-  getMilesWalkedOn(userData) {
-    let stridesInAMile = 5280 / userData.strideLength;
+  getMilesWalkedOn(user) {
+    let stridesInAMile = 5280 / user.strideLength;
     let stepsInAMile = stridesInAMile * 2;
     let milesWalked = this.numSteps / stepsInAMile;
     return parseFloat(milesWalked.toFixed(2));
@@ -50,9 +50,33 @@ class Activity {
     return record;
   }
 
+  logActivity(user) {
+    user.activityToDate.push(this);
+  }
 
-  // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
+  getStairsClimbedForDate(user, givenDate) {
+    let activityToDate = user.activityToDate;
+    let matchingDate = activityToDate.find(el => {
+      return el.date === givenDate;
+    });
+    return matchingDate.flightsOfStairs;
+  }
 
+  getStepsTakenForDate(user, givenDate) {
+    let activityToDate = user.activityToDate;
+    let matchingDate = activityToDate.find(el => {
+      return el.date === givenDate;
+    });
+    return matchingDate.numSteps;
+  }
+
+  getActiveMinutesForDate(user, givenDate) {
+    let activityToDate = user.activityToDate;
+    let matchingDate = activityToDate.find(el => {
+      return el.date === givenDate;
+    });
+    return matchingDate.minutesActive;
+  }
 }
 
 if (typeof module !== 'undefined') {

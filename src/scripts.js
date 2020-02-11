@@ -6,6 +6,13 @@ let body = document.querySelector('body');
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
   let user = new User(userData[0]);
+  createDashboard(user, userRepository);
+  getHydrationInfo(user);
+  getSleepInfo(user);
+  getActivityInfo(user);
+}
+
+function createDashboard(user, userRepository) {
   body.insertAdjacentHTML('afterBegin',
     `<header>
       <h1>Welcome, <span>${user.getUsersFirstName()}</span>!<h1>
@@ -24,8 +31,6 @@ function getUserInfo() {
       <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
     </section>
   `);
-  getHydrationInfo(user);
-  getSleepInfo(user);
 }
 
 function getHydrationInfo(user) {
@@ -56,7 +61,6 @@ function createWeeklyHydrationWidget(weeklyHydration) {
       <p>${el.numOunces} OZ<p>
     </div>`
   })
-
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='three'>
       <p>OUNCES OF WATER PAST 7 DAYS:</p>
@@ -101,7 +105,6 @@ function createWeeklySleepWidget(weeklySleep) {
       <p>${el.hoursSlept} hours slept | ${el.sleepQuality} quality<p>
     </div>`
   })
-
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='five'>
       <p>PAST 7 DAYS OF SLEEP:</p>
@@ -109,3 +112,95 @@ function createWeeklySleepWidget(weeklySleep) {
     </section>`
   )
 }
+
+function getActivityInfo(user) {
+  let userActivityDataObjs = activityData.filter(el => el.userID === user.id).map(el => {
+    return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
+  });
+  user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
+  let dailyUserActivity = user.activityToDate.find(el => el.date === "2019/06/28");
+  let allUserActivityTodayDataObjs = activityData.filter(el => el.date === "2019/06/28").map(el => {
+    return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
+  });
+  handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user)
+}
+
+function handleDailyActivity(dailyUserActivity, allUserActivityTodayDataObjs, user) {
+  let totalActiveMinsAvg = getActiveMinutesInfo(allUserActivityTodayDataObjs);
+  let totalStepsAvg = getStepsInfo(allUserActivityTodayDataObjs);
+  let totalFlightsAvg = getFlightsInfo(allUserActivityTodayDataObjs);
+  let totalMilesAvg = getMilesWalkedInfo(allUserActivityTodayDataObjs, user);
+  createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, totalStepsAvg, totalFlightsAvg, totalMilesAvg);
+  // createWeeklyActivityWidget();
+}
+
+function getActiveMinutesInfo(allUserActivityTodayDataObjs) {
+  let minutesActiveToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
+    acc += number.minutesActive;
+    return acc;
+  }, 0);
+  let minutesActiveAvgToday = Math.round(minutesActiveToday / allUserActivityTodayDataObjs.length);
+  return minutesActiveAvgToday;
+}
+
+function getStepsInfo(allUserActivityTodayDataObjs) {
+  let stepsToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
+    acc += number.numSteps;
+    return acc;
+  }, 0);
+  let stepsAvgToday = Math.round(stepsToday / allUserActivityTodayDataObjs.length);
+  return stepsAvgToday;
+}
+
+function getFlightsInfo(allUserActivityTodayDataObjs) {
+  let flightsClimbedToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
+    acc += number.flightsOfStairs;
+    return acc;
+  }, 0);
+  let flightsClimbedAvgToday = Math.round(flightsClimbedToday / allUserActivityTodayDataObjs.length);
+  return flightsClimbedAvgToday;
+}
+
+function getMilesWalkedInfo(allUserActivityTodayDataObjs, user) {
+  let milesWalkedToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
+    acc += number.getMilesWalkedOn(user);
+    return acc;
+  }, 0);
+  let milesAvgToday = Math.round(milesWalkedToday / allUserActivityTodayDataObjs.length);
+  return milesAvgToday;
+}
+
+function createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, totalStepsAvg, totalFlightsAvg, totalMilesAvg) {
+  wrapper.insertAdjacentHTML('beforeEnd',
+    `<section class='six'>
+      <p class='activity-today'>ACTIVITY TODAY:</p>
+      <p class='activity-today'>STEPS: ${dailyUserActivity.numSteps}</p>
+      <p class=activity-today'>MILES: ${dailyUserActivity.getMilesWalkedOn(user)}</p>
+      <p class=activity-today'>ACTIVE MINUTES: ${dailyUserActivity.minutesActive}</p>
+      <p class=activity-today'>FLIGHTS: ${dailyUserActivity.flightsOfStairs}</p>
+      <p class='activity-today'>AVERAGE USER TODAY:</p>
+      <p class='activity-today'>STEPS: ${totalStepsAvg}</p>
+      <p class='activity-today'>MILES: ${totalMilesAvg}</p>
+      <p class='activity-today'>ACTIVE MINUTES: ${totalActiveMinsAvg}</p>
+      <p class='activity-today'>FLIGHTS: ${totalFlightsAvg}</p>
+    </section>`
+  )
+}
+
+// function createWeeklyActivityWidget(weeklyActivity) {
+//   let weeklyActivity = weeklyHydration.map(el => {
+//     return `<div class='weekly-water'>
+//       <p>DATE: ${el.date}<p>
+//       <p>${el.numOunces} OZ<p>
+//     </div>`
+//   })
+//   wrapper.insertAdjacentHTML('beforeEnd',
+//     `<section class='three'>
+//       <p>OUNCES OF WATER PAST 7 DAYS:</p>
+//       ${weeklyWater.join(" ")}
+//     </section>`
+//   )
+// }
+// Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
+
+  // - [ ] For a user, a weekly view of their step count, flights of stairs climbed, and minutes active

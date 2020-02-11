@@ -8,8 +8,8 @@ class User {
     this.dailyStepGoal = userDataObj.dailyStepGoal;
     this.friends = userDataObj.friends;
     this.hydrationToDate = [];
-    this.activityToDate = [];
     this.sleepToDate = [];
+    this.activityToDate = [];
   }
 
   getUsersFirstName() {

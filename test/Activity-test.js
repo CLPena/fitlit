@@ -57,6 +57,14 @@ describe('Activity', function() {
     activity7 = new Activity(1, '2019/06/21', 6941, 180, 16);
     activity8 = new Activity(1, '2019/06/22', 9841, 80, 16);
 
+    activity1.logActivity(user1);
+    activity2.logActivity(user1);
+    activity3.logActivity(user1);
+    activity4.logActivity(user1);
+    activity5.logActivity(user1);
+    activity6.logActivity(user1);
+    activity7.logActivity(user1);
+    activity8.logActivity(user1);
 
     userRepository = new UserRepository([activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8]);
   });
@@ -126,5 +134,17 @@ describe('Activity', function() {
   it('should find a users all time stair climbing record', function() {
     expect(activity1.getStairClimbingRecord(userRepository.userData)).to.equal(33);
   });
+
+  it('should find stairs climbed for a given date', function() {
+    expect(activity1.getStairsClimbedForDate(user1, '2019/06/16')).to.equal(10);
+  })
+
+  it('should find steps taken for a given date', function() {
+    expect(activity1.getStepsTakenForDate(user1, '2019/06/16')).to.equal(4294);
+  })
+
+  it('should find active minutes for a given date', function() {
+    expect(activity1.getActiveMinutesForDate(user1, '2019/06/16')).to.equal(138);
+  })
 
 });

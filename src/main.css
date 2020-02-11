@@ -28,7 +28,8 @@ main {
 .two,
 .three,
 .four,
-.five {
+.five,
+.six {
   background: #FFFFFF;
   border-radius: 1%;
   padding: 1%;
@@ -48,6 +49,9 @@ main {
 }
 .five {
   grid-area: five;
+}
+.six {
+  grid-area: six;
 }
 .user-name,
 p {
