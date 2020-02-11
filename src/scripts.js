@@ -112,22 +112,20 @@ function createWeeklySleepWidget(weeklySleep) {
 }
 
 function getActivityInfo(user) {
-  let userActivityData = activityData.filter(el => el.userID === user.id);
-  let userActivityDataObjs = userActivityData.map(el => {
+  let userActivityDataObjs = activityData.filter(el => el.userID === user.id).map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
   let userActivityToday = userActivityDataObjs.filter(el => el.date === "2019/06/28");
   user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
   let dailyUserActivity = user.activityToDate.find(el => el.date === "2019/06/28");
-  let allUserActivityToday = activityData.filter(el => el.date === "2019/06/28");
-  let allUserActivityTodayDataObjs = allUserActivityToday.map(el => {
+  let allUserActivityTodayDataObjs = activityData.filter(el => el.date === "2019/06/28").map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
-  let activeMinutesAvgTodayAllUsers = getActiveMinutesInfo(allUserActivityTodayDataObjs);
-  let stepsAvgTodayAllUsers = getStepsInfo(allUserActivityTodayDataObjs);
-  let flightsAvgTodayAllUsers = getFlightsInfo(allUserActivityTodayDataObjs);
-  let milesWalkedAvgTodayAllUsers = getMilesWalkedInfo(allUserActivityTodayDataObjs, user);
-  createDailyActivityWidget(dailyUserActivity, user, activeMinutesAvgTodayAllUsers, stepsAvgTodayAllUsers, flightsAvgTodayAllUsers, milesWalkedAvgTodayAllUsers);
+  let totalActiveMinsAvg = getActiveMinutesInfo(allUserActivityTodayDataObjs);
+  let totalStepsAvg = getStepsInfo(allUserActivityTodayDataObjs);
+  let totalFlightsAvg = getFlightsInfo(allUserActivityTodayDataObjs);
+  let totalMilesAvg = getMilesWalkedInfo(allUserActivityTodayDataObjs, user);
+  createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, totalStepsAvg, totalFlightsAvg, totalMilesAvg);
 }
 
 function getActiveMinutesInfo(allUserActivityTodayDataObjs) {
@@ -166,7 +164,7 @@ function getMilesWalkedInfo(allUserActivityTodayDataObjs, user){
   return milesAvgToday;
 }
 
-function createDailyActivityWidget(dailyUserActivity, user, activeMinutesAvgTodayAllUsers, stepsAvgTodayAllUsers, flightsAvgTodayAllUsers, milesWalkedAvgTodayAllUsers) {
+function createDailyActivityWidget(dailyUserActivity, user, totalActiveMinsAvg, totalStepsAvg, totalFlightsAvg, totalMilesAvg) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='six'>
       <p class='activity-today'>ACTIVITY TODAY:</p>
@@ -175,10 +173,10 @@ function createDailyActivityWidget(dailyUserActivity, user, activeMinutesAvgToda
       <p class=activity-today'>ACTIVE MINUTES: ${dailyUserActivity.minutesActive}</p>
       <p class=activity-today'>FLIGHTS: ${dailyUserActivity.flightsOfStairs}</p>
       <p class='activity-today'>AVERAGE USER TODAY:</p>
-      <p class='activity-today'>STEPS: ${stepsAvgTodayAllUsers}</p>
-      <p class='activity-today'>MILES: ${milesWalkedAvgTodayAllUsers}</p>
-      <p class='activity-today'>ACTIVE MINUTES: ${activeMinutesAvgTodayAllUsers}</p>
-      <p class='activity-today'>FLIGHTS: ${flightsAvgTodayAllUsers}</p>
+      <p class='activity-today'>STEPS: ${totalStepsAvg}</p>
+      <p class='activity-today'>MILES: ${totalMilesAvg}</p>
+      <p class='activity-today'>ACTIVE MINUTES: ${totalActiveMinsAvg}</p>
+      <p class='activity-today'>FLIGHTS: ${totalFlightsAvg}</p>
     </section>`
   )
 }
