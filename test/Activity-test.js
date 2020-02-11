@@ -5,9 +5,7 @@ const User = require('../src/User');
 const UserRepository = require('../src/UserRepository');
 
 describe('Activity', function() {
-  let user1;
-  let user2;
-  let user3;
+  let user;
   let userRepository;
   let activity1;
   let activity2;
@@ -19,33 +17,13 @@ describe('Activity', function() {
   let activity8;
 
   beforeEach(function() {
-    user1 = new User({
+    user = new User({
       id: 1,
       name: 'Luisa Hane',
       address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com',
       strideLength: 4.3,
       dailyStepGoal: 10000,
       friends: [16, 4, 8]
-    });
-
-    user2 = new User({
-      id: 2,
-      name: 'Jarvis Considine',
-      address: '30086 Kathryn Port, Ciceroland NE 0727330086 Kathryn Port, Ciceroland NE 07273',
-      email: 'Dimitri.Bechtelar11@gmail.com',
-      strideLength: 4.5,
-      dailyStepGoal: 5000,
-      friends: [9, 18, 24, 19]
-    });
-
-    user3 = new User({
-      id: 3,
-      name: 'Herminia Witting',
-      address: '85823 Bosco Fork, East Oscarstad MI 85126-5660',
-      email: 'Elwin.Tromp@yahoo.com',
-      strideLength: 4.4,
-      dailyStepGoal: 5000,
-      friends: [19, 11, 42, 33]
     });
 
     activity1 = new Activity(1, '2019/06/15', 3577, 140, 16);
@@ -57,14 +35,14 @@ describe('Activity', function() {
     activity7 = new Activity(1, '2019/06/21', 6941, 180, 16);
     activity8 = new Activity(1, '2019/06/22', 9841, 80, 16);
 
-    activity1.logActivity(user1);
-    activity2.logActivity(user1);
-    activity3.logActivity(user1);
-    activity4.logActivity(user1);
-    activity5.logActivity(user1);
-    activity6.logActivity(user1);
-    activity7.logActivity(user1);
-    activity8.logActivity(user1);
+    activity1.logActivity(user);
+    activity2.logActivity(user);
+    activity3.logActivity(user);
+    activity4.logActivity(user);
+    activity5.logActivity(user);
+    activity6.logActivity(user);
+    activity7.logActivity(user);
+    activity8.logActivity(user);
 
     userRepository = new UserRepository([activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8]);
   });
@@ -106,9 +84,7 @@ describe('Activity', function() {
   });
 
   it('should return the miles a user has walked based on their number of steps', function() {
-    expect(activity1.getMilesWalkedOn(user1, '2019/06/15')).to.equal(1.46);
-    expect(activity2.getMilesWalkedOn(user2, '2019/06/15')).to.equal(1.83);
-    expect(activity3.getMilesWalkedOn(user3, '2019/06/15')).to.equal(3.08);
+    expect(activity1.getMilesWalkedOn(user, '2019/06/15')).to.equal(1.46);
   });
 
   it('should return how many minutes a user is active on a given day', function() {
@@ -118,13 +94,12 @@ describe('Activity', function() {
   });
 
   it('should find how many minutes active a user averaged for a given week', function() {
-    expect(activity1.getWeeklyActiveMinutes(userRepository, '2019/06/21')).to.equal(135);
-    expect(activity1.getWeeklyActiveMinutes(userRepository, '2019/06/22')).to.equal(126);
+    expect(activity1.getWeeklyAvgActiveMinutes(userRepository, '2019/06/21')).to.equal(135);
+    expect(activity1.getWeeklyAvgActiveMinutes(userRepository, '2019/06/22')).to.equal(126);
   });
 
   it('should find if a user met their step goal for a given day', function() {
-    expect(activity1.compareStepGoal(user1, '2019/06/15')).to.equal(false);
-    expect(activity3.compareStepGoal(user2, '2019/06/17')).to.equal(true);
+    expect(activity1.compareStepGoal(user, '2019/06/15')).to.equal(false);
   });
 
   it('should find all days where a user exceeded their step goal', function() {
@@ -136,15 +111,15 @@ describe('Activity', function() {
   });
 
   it('should find stairs climbed for a given date', function() {
-    expect(activity1.getStairsClimbedForDate(user1, '2019/06/16')).to.equal(10);
+    expect(activity1.getStairsClimbedForDate(user, '2019/06/16')).to.equal(10);
   })
 
   it('should find steps taken for a given date', function() {
-    expect(activity1.getStepsTakenForDate(user1, '2019/06/16')).to.equal(4294);
+    expect(activity1.getStepsTakenForDate(user, '2019/06/16')).to.equal(4294);
   })
 
   it('should find active minutes for a given date', function() {
-    expect(activity1.getActiveMinutesForDate(user1, '2019/06/16')).to.equal(138);
+    expect(activity1.getActiveMinutesForDate(user, '2019/06/16')).to.equal(138);
   })
 
 });
