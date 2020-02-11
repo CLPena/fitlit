@@ -116,9 +116,10 @@ function getActivityInfo(user) {
   let userActivityDataObjs = userActivityData.map(el => {
     return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
   });
-  let userActivityToday = activityData.filter(el => el.date === "2019/06/28");
+  let userActivityToday = userActivityDataObjs.filter(el => el.date === "2019/06/28");
   user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
-  let dailyActivity = user.activityToDate.find(el => el.date === "2019/06/28");
+  let dailyUserActivity = user.activityToDate.find(el => el.date === "2019/06/28");
+
 // break out into separate functions
   let minutesActiveToday = userActivityToday.reduce((acc, number) => {
     acc += number.minutesActive;
@@ -138,20 +139,23 @@ function getActivityInfo(user) {
   }, 0);
   let flightsClimbedAvgToday = Math.round(flightsClimbedToday / userActivityToday.length);
 
+  let milesWalkedToday = userActivityToday.reduce((acc, number) => {
+    acc += number.getMilesWalkedOn(user);
+    return acc;
+  }, 0);
+  let milesWalkedAvgToday = 0;
+  createDailyActivityWidget(dailyUserActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday);
+}
   // create variable here for miles walked on avg that day
 
-  createDailyActivityWidget(dailyActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday);
-  // createWeeklyHydrationWidget(weeklyHydration);
-}
-
-function createDailyActivityWidget(dailyActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday) {
+function createDailyActivityWidget(dailyUserActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='six'>
       <p class='activity-today'>ACTIVITY TODAY:</p>
-      <p class='activity-today'>STEPS: ${dailyActivity.numSteps}</p>
-      <p class=activity-today'>MILES: ${dailyActivity.getMilesWalkedOn(user)}</p>
-      <p class=activity-today'>ACTIVE MINUTES: ${dailyActivity.minutesActive}</p>
-      <p class=activity-today'>FLIGHTS: ${dailyActivity.flightsOfStairs}</p>
+      <p class='activity-today'>STEPS: ${dailyUserActivity.numSteps}</p>
+      <p class=activity-today'>MILES: ${dailyUserActivity.getMilesWalkedOn(user)}</p>
+      <p class=activity-today'>ACTIVE MINUTES: ${dailyUserActivity.minutesActive}</p>
+      <p class=activity-today'>FLIGHTS: ${dailyUserActivity.flightsOfStairs}</p>
       <p class='activity-today'>AVERAGE USER TODAY:</p>
       <p class='activity-today'>STEPS: ${stepsAvgToday}</p>
       <p class='activity-today'>ACTIVE MINUTES: ${minutesActiveAvgToday}</p>
