@@ -19,8 +19,8 @@ class Activity {
     return this.minutesActive;
   }
 
-  getWeeklyActiveMinutes(data, date) {
-    let activityData = data.getTheWeekOf(date);
+  getWeeklyAvgActiveMinutes(userData, date) {
+    let activityData = userData.getTheWeekOf(date);
     let avg = 0;
     activityData.forEach(el => {
       avg += el.minutesActive / activityData.length;
