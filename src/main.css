@@ -18,7 +18,8 @@ main {
   grid-gap: 10px;
   grid-template-areas:
   "one two three"
-  "four five six";
+  "four five six"
+  "seven eight nine";
   grid-template-rows: 2fr 2fr 2fr;
   height: 100%;
   margin: 0 10%;
@@ -29,7 +30,8 @@ main {
 .three,
 .four,
 .five,
-.six {
+.six,
+.seven {
   background: #FFFFFF;
   border-radius: 1%;
   padding: 1%;
@@ -52,6 +54,9 @@ main {
 }
 .six {
   grid-area: six;
+}
+.seven {
+  grid-area: seven;
 }
 .user-name,
 p {
