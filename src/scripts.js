@@ -26,6 +26,7 @@ function getUserInfo() {
   `);
   getHydrationInfo(user);
   getSleepInfo(user);
+  getActivityInfo(user);
 }
 
 function getHydrationInfo(user) {
@@ -109,3 +110,37 @@ function createWeeklySleepWidget(weeklySleep) {
     </section>`
   )
 }
+
+function getActivityInfo(user) {
+  let userActivityData = activityData.filter(el => el.userID === user.id);
+  let userActivityDataObjs = userActivityData.map(el => {
+    return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
+  });
+  user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
+  let dailyActivity = user.activityToDate.find(el => el.date === "2019/06/28");
+  createDailyActivityWidget(dailyActivity);
+  // createWeeklyHydrationWidget(weeklyHydration);
+}
+
+function createDailyActivityWidget(dailyActivity) {
+  wrapper.insertAdjacentHTML('beforeEnd',
+    `<section class='six'>
+      <p class='activity-today'>HOURS SLEPT LAST NIGHT:</p>
+      <p class='activity-today'>${dailySleep.hoursSlept} hours</p>
+      <p class='activity-today'>SLEEP QUALITY LAST NIGHT:</p>
+      <p class='activity-today'>${dailySleep.sleepQuality}</p>
+      <p class=activity-today'>ALL-TIME AVERAGE HOURS SLEPT:</p>
+      <p class=activity-today'>${dailySleep.getAvgHoursSlept()}</p>
+      <p class=activity-today'>ALL-TIME AVERAGE SLEEP QUALITY:</p>
+      <p class=activity-today'>${dailySleep.getAvgSleepQuality()}</p>
+    </section>`
+  )
+}
+
+  // - [ ] For a user, the number of steps for the latest day
+  // - [ ] For a user, the number minutes active for the latest day
+  // - [ ] For a user, the distance they have walked (in miles) for the latest day based on their step count
+  // - [ ] How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
+
+
+  // - [ ] For a user, a weekly view of their step count, flights of stairs climbed, and minutes active
