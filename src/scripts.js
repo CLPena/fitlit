@@ -118,23 +118,22 @@ function getActivityInfo(user) {
   });
   user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
   let dailyActivity = user.activityToDate.find(el => el.date === "2019/06/28");
-  createDailyActivityWidget(dailyActivity);
+  createDailyActivityWidget(dailyActivity, user);
   // createWeeklyHydrationWidget(weeklyHydration);
 }
 
-function createDailyActivityWidget(dailyActivity) {
+function createDailyActivityWidget(dailyActivity, user) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='six'>
       <p class='activity-today'>TODAY:</p>
-      <p class='activity-today'>STEPS:${dailyActivity.numSteps}</p>
-      <p class=activity-today'>MINUTES ACTIVE:${dailyActivity.minutesActive}</p>
-      <p class=activity-today'>MILES:${dailyActivity.getMilesWalkedOn()}</p>
+      <p class='activity-today'>STEPS: ${dailyActivity.numSteps}</p>
+      <p class=activity-today'>MINUTES ACTIVE: ${dailyActivity.minutesActive}</p>
+      <p class=activity-today'>MILES: ${dailyActivity.getMilesWalkedOn(user)}</p>
     </section>`
   )
 }
 
-  // - [ ] For a user, the distance they have walked (in miles) for the latest day based on their step count
+// Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
+
   // - [ ] How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
-
-
   // - [ ] For a user, a weekly view of their step count, flights of stairs climbed, and minutes active
