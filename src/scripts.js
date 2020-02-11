@@ -148,11 +148,9 @@ function getActivityInfo(user) {
     return acc;
   }, 0);
   let milesAvgToday = Math.round(milesWalkedToday / allUserActivityTodayDataObjs.length);
-  console.log(milesAvgToday)
 
   createDailyActivityWidget(dailyUserActivity, user, milesAvgToday, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday);
 }
-  // create variable here for miles walked on avg that day
 
 function createDailyActivityWidget(dailyUserActivity, user, milesAvgToday, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday) {
   wrapper.insertAdjacentHTML('beforeEnd',
@@ -172,5 +170,4 @@ function createDailyActivityWidget(dailyUserActivity, user, milesAvgToday, minut
 }
 // Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
 
-  // - [ ] How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
   // - [ ] For a user, a weekly view of their step count, flights of stairs climbed, and minutes active
