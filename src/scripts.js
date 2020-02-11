@@ -138,6 +138,8 @@ function getActivityInfo(user) {
   }, 0);
   let flightsClimbedAvgToday = Math.round(flightsClimbedToday / userActivityToday.length);
 
+  // create variable here for miles walked on avg that day
+
   createDailyActivityWidget(dailyActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday);
   // createWeeklyHydrationWidget(weeklyHydration);
 }
@@ -147,13 +149,17 @@ function createDailyActivityWidget(dailyActivity, user, minutesActiveAvgToday, s
     `<section class='six'>
       <p class='activity-today'>ACTIVITY TODAY:</p>
       <p class='activity-today'>STEPS: ${dailyActivity.numSteps}</p>
-      <p class=activity-today'>MINUTES ACTIVE: ${dailyActivity.minutesActive}</p>
       <p class=activity-today'>MILES: ${dailyActivity.getMilesWalkedOn(user)}</p>
+      <p class=activity-today'>ACTIVE MINUTES: ${dailyActivity.minutesActive}</p>
+      <p class=activity-today'>FLIGHTS: ${dailyActivity.flightsOfStairs}</p>
       <p class='activity-today'>AVERAGE USER TODAY:</p>
+      <p class='activity-today'>STEPS: ${stepsAvgToday}</p>
+      <p class='activity-today'>ACTIVE MINUTES: ${minutesActiveAvgToday}</p>
+      <p class='activity-today'>FLIGHTS: ${flightsClimbedAvgToday}</p>
     </section>`
   )
 }
-
+// add <p class='activity-today'>MILES: ${milesAvgToday}</p>
 // Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
 
   // - [ ] How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
