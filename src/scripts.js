@@ -119,36 +119,42 @@ function getActivityInfo(user) {
   let userActivityToday = userActivityDataObjs.filter(el => el.date === "2019/06/28");
   user.activityToDate = user.activityToDate.concat(userActivityDataObjs);
   let dailyUserActivity = user.activityToDate.find(el => el.date === "2019/06/28");
+  let allUserActivityToday = activityData.filter(el => el.date === "2019/06/28");
+  let allUserActivityTodayDataObjs = allUserActivityToday.map(el => {
+    return new Activity(el.userID, el.date, el.numSteps, el.minutesActive, el.flightsOfStairs)
+  });
 
 // break out into separate functions
-  let minutesActiveToday = userActivityToday.reduce((acc, number) => {
+  let minutesActiveToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
     acc += number.minutesActive;
     return acc;
   }, 0);
-  let minutesActiveAvgToday = Math.round(minutesActiveToday / userActivityToday.length);
+  let minutesActiveAvgToday = Math.round(minutesActiveToday / allUserActivityTodayDataObjs.length);
 
-  let stepsToday = userActivityToday.reduce((acc, number) => {
+  let stepsToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
     acc += number.numSteps;
     return acc;
   }, 0);
-  let stepsAvgToday = Math.round(stepsToday / userActivityToday.length);
+  let stepsAvgToday = Math.round(stepsToday / allUserActivityTodayDataObjs.length);
 
-  let flightsClimbedToday = userActivityToday.reduce((acc, number) => {
+  let flightsClimbedToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
     acc += number.flightsOfStairs;
     return acc;
   }, 0);
-  let flightsClimbedAvgToday = Math.round(flightsClimbedToday / userActivityToday.length);
+  let flightsClimbedAvgToday = Math.round(flightsClimbedToday / allUserActivityTodayDataObjs.length);
 
-  let milesWalkedToday = userActivityToday.reduce((acc, number) => {
+  let milesWalkedToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
     acc += number.getMilesWalkedOn(user);
     return acc;
   }, 0);
-  let milesWalkedAvgToday = 0;
-  createDailyActivityWidget(dailyUserActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday);
+  let milesAvgToday = Math.round(milesWalkedToday / allUserActivityTodayDataObjs.length);
+  console.log(milesAvgToday)
+
+  createDailyActivityWidget(dailyUserActivity, user, milesAvgToday, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday);
 }
   // create variable here for miles walked on avg that day
 
-function createDailyActivityWidget(dailyUserActivity, user, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday) {
+function createDailyActivityWidget(dailyUserActivity, user, milesAvgToday, minutesActiveAvgToday, stepsAvgToday, flightsClimbedAvgToday) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='six'>
       <p class='activity-today'>ACTIVITY TODAY:</p>
@@ -158,12 +164,12 @@ function createDailyActivityWidget(dailyUserActivity, user, minutesActiveAvgToda
       <p class=activity-today'>FLIGHTS: ${dailyUserActivity.flightsOfStairs}</p>
       <p class='activity-today'>AVERAGE USER TODAY:</p>
       <p class='activity-today'>STEPS: ${stepsAvgToday}</p>
+      <p class='activity-today'>MILES: ${milesAvgToday}</p>
       <p class='activity-today'>ACTIVE MINUTES: ${minutesActiveAvgToday}</p>
       <p class='activity-today'>FLIGHTS: ${flightsClimbedAvgToday}</p>
     </section>`
   )
 }
-// add <p class='activity-today'>MILES: ${milesAvgToday}</p>
 // Ask Maddy - how exactly does getMilesWalkedOn function work? Test seems to take two parameters but method only takes one.
 
   // - [ ] How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
