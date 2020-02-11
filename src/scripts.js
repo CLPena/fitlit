@@ -6,6 +6,13 @@ let body = document.querySelector('body');
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
   let user = new User(userData[0]);
+  createDashboard(user, userRepository);
+  getHydrationInfo(user);
+  getSleepInfo(user);
+  getActivityInfo(user);
+}
+
+function createDashboard(user, userRepository) {
   body.insertAdjacentHTML('afterBegin',
     `<header>
       <h1>Welcome, <span>${user.getUsersFirstName()}</span>!<h1>
@@ -24,9 +31,6 @@ function getUserInfo() {
       <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
     </section>
   `);
-  getHydrationInfo(user);
-  getSleepInfo(user);
-  getActivityInfo(user);
 }
 
 function getHydrationInfo(user) {
@@ -57,7 +61,6 @@ function createWeeklyHydrationWidget(weeklyHydration) {
       <p>${el.numOunces} OZ<p>
     </div>`
   })
-
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='three'>
       <p>OUNCES OF WATER PAST 7 DAYS:</p>
@@ -102,7 +105,6 @@ function createWeeklySleepWidget(weeklySleep) {
       <p>${el.hoursSlept} hours slept | ${el.sleepQuality} quality<p>
     </div>`
   })
-
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='five'>
       <p>PAST 7 DAYS OF SLEEP:</p>
@@ -155,7 +157,7 @@ function getFlightsInfo(allUserActivityTodayDataObjs) {
   return flightsClimbedAvgToday;
 }
 
-function getMilesWalkedInfo(allUserActivityTodayDataObjs, user){
+function getMilesWalkedInfo(allUserActivityTodayDataObjs, user) {
   let milesWalkedToday = allUserActivityTodayDataObjs.reduce((acc, number) => {
     acc += number.getMilesWalkedOn(user);
     return acc;
