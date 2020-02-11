@@ -71,7 +71,11 @@ class Activity {
   }
 
   getActiveMinutesForDate(user, givenDate) {
-    // go through userData and find the obj with matching date
+    let activityToDate = user.activityToDate;
+    let matchingDate = activityToDate.find(el => {
+      return el.date === givenDate;
+    });
+    return matchingDate.minutesActive;
   }
 }
 

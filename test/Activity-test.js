@@ -143,4 +143,8 @@ describe('Activity', function() {
     expect(activity1.getStepsTakenForDate(user1, '2019/06/16')).to.equal(4294);
   })
 
+  it('should find active minutes for a given date', function() {
+    expect(activity1.getActiveMinutesForDate(user1, '2019/06/16')).to.equal(138);
+  })
+
 });
