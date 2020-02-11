@@ -50,9 +50,29 @@ class Activity {
     return record;
   }
 
+  logActivity(user) {
+    user.activityToDate.push(this);
+  }
+  
+  getStairsClimbedForDate(user, givenDate) {
+    console.log(user)
+    // let totalUserActivity = activityData.filter(el => {
+    //   el.userID === this.userID
+    // });
+    // let matchingDate = totalUserActivity.find(el => {
+    //   return el.date === givenDate;
+    // });
+    // return matchingDate.flightsOfStairs;
+    // }
+    // go through userData and find the obj with matching date
+}
+  getStepsTakenForDate(userData, givenDate) {
+    // go through userData and find the obj with matching date
+  }
 
-  // Make a metric of your own! Document it, calculate it, and display it. (iteration 3 for sleep)
-
+  getActiveMinutesForDate(userData, givenDate) {
+    // go through userData and find the obj with matching date
+  }
 }
 
 if (typeof module !== 'undefined') {
