@@ -68,7 +68,6 @@ class Activity {
       return el.date === givenDate;
     });
     return matchingDate.numSteps;
-    // go through userData and find the obj with matching date
   }
 
   getActiveMinutesForDate(user, givenDate) {
