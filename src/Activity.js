@@ -8,8 +8,8 @@ class Activity {
     this.exceededStepGoal = [];
   }
 
-  getMilesWalkedOn(userData) {
-    let stridesInAMile = 5280 / userData.strideLength;
+  getMilesWalkedOn(user) {
+    let stridesInAMile = 5280 / user.strideLength;
     let stepsInAMile = stridesInAMile * 2;
     let milesWalked = this.numSteps / stepsInAMile;
     return parseFloat(milesWalked.toFixed(2));

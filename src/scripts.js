@@ -125,20 +125,14 @@ function getActivityInfo(user) {
 function createDailyActivityWidget(dailyActivity) {
   wrapper.insertAdjacentHTML('beforeEnd',
     `<section class='six'>
-      <p class='activity-today'>HOURS SLEPT LAST NIGHT:</p>
-      <p class='activity-today'>${dailySleep.hoursSlept} hours</p>
-      <p class='activity-today'>SLEEP QUALITY LAST NIGHT:</p>
-      <p class='activity-today'>${dailySleep.sleepQuality}</p>
-      <p class=activity-today'>ALL-TIME AVERAGE HOURS SLEPT:</p>
-      <p class=activity-today'>${dailySleep.getAvgHoursSlept()}</p>
-      <p class=activity-today'>ALL-TIME AVERAGE SLEEP QUALITY:</p>
-      <p class=activity-today'>${dailySleep.getAvgSleepQuality()}</p>
+      <p class='activity-today'>TODAY:</p>
+      <p class='activity-today'>STEPS:${dailyActivity.numSteps}</p>
+      <p class=activity-today'>MINUTES ACTIVE:${dailyActivity.minutesActive}</p>
+      <p class=activity-today'>MILES:${dailyActivity.getMilesWalkedOn()}</p>
     </section>`
   )
 }
 
-  // - [ ] For a user, the number of steps for the latest day
-  // - [ ] For a user, the number minutes active for the latest day
   // - [ ] For a user, the distance they have walked (in miles) for the latest day based on their step count
   // - [ ] How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
 
