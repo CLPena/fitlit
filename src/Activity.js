@@ -53,19 +53,15 @@ class Activity {
   logActivity(user) {
     user.activityToDate.push(this);
   }
-  
+
   getStairsClimbedForDate(user, givenDate) {
-    console.log(user)
-    // let totalUserActivity = activityData.filter(el => {
-    //   el.userID === this.userID
-    // });
-    // let matchingDate = totalUserActivity.find(el => {
-    //   return el.date === givenDate;
-    // });
-    // return matchingDate.flightsOfStairs;
-    // }
-    // go through userData and find the obj with matching date
-}
+    let activityToDate = user.activityToDate;
+    let matchingDate = activityToDate.find(el => {
+      return el.date === givenDate;
+    });
+    return matchingDate.flightsOfStairs;
+  }
+
   getStepsTakenForDate(userData, givenDate) {
     // go through userData and find the obj with matching date
   }
