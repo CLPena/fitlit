@@ -21,31 +21,25 @@ function getUserInfo() {
   getIncreasingSteps(user);
 }
 
-function getIncreasingSteps(user) {
-  let stepIncrementer = 0;
-  user.activityToDate.reduce((acc, el) => {
-    if (el.numSteps > stepIncrementer) {
-      // console.log(el.date, el.numSteps)
-      stepIncrementer = el.numSteps;
-      acc.counter = stepIncrementer;
-      acc.increasingSteps.push(el.date)
-      if (acc.increasingSteps.length >= 3) {
-        // console.log('acc counter & steps: ', acc.counter, acc.increasingSteps)
-      }
-    } else {
-      // console.log(el.date, el.numSteps)
-      acc.counter = 0;
-      acc.increasingSteps = [];
-      stepIncrementer = el.numSteps;
-      // console.log('acc: ', acc)
-    }
-    return acc;
-  }, {counter: 0, increasingSteps: []})
-
-}
+// function getIncreasingSteps(user) {
+//   let stepIncrementer = 0;
+//   user.activityToDate.reduce((acc, el) => {
+//     if (el.numSteps > stepIncrementer) {
+//       stepIncrementer = el.numSteps;
+//       acc.counter = stepIncrementer;
+//       acc.increasingSteps.push(el.date)
+//       if (acc.increasingSteps.length >= 3) {
+//       }
+//     } else {
+//       acc.counter = 0;
+//       acc.increasingSteps = [];
+//       stepIncrementer = el.numSteps;
+//     }
+//     return acc;
+//   }, {counter: 0, increasingSteps: []})
+// }
 
 function createDashboard(user, userRepository) {
-
   body.insertAdjacentHTML('afterBegin',
     `<header>
       <h1>Welcome, <span>${user.getUsersFirstName()}</span>!<h1>
@@ -70,10 +64,10 @@ function getFriends(user, userRepository) {
   let weekDates = ["2019/06/28", "2019/06/27", "2019/06/26", "2019/06/25", "2019/06/24", "2019/06/23", "2019/06/22"];
   let usersOnGivenDate = [];
   weekDates.forEach(date => {
-    let allUsersOnGivenDate = activityData.filter(day => {
+    activityData.filter(day => {
       if (day.date === date) {
         addFriendsToArray(user, day, usersOnGivenDate);
-      };
+      }
     });
   });
 
@@ -124,7 +118,7 @@ function getUserFriendsWidget(friendsActivityWeek, userRepository, winnerName) {
   addStepChallengeWidget(weeklyFriends, winnerName);
 }
 
-function addStepChallengeWidget(weeklyFriends, winnerName){
+function addStepChallengeWidget(weeklyFriends, winnerName) {
   wrapper.insertAdjacentHTML('afterBegin', `
     <section class='eight'>
       <p>FRIENDS STEP COUNT FOR</p>
@@ -302,10 +296,10 @@ function createWeeklyActivityWidget(userActivityDataObjs) {
     </div>
     `
   });
-    wrapper.insertAdjacentHTML('beforeEnd',
-      `<section class='seven'>
-        <p>ACTIVITY PAST 7 DAYS:</p>
-        ${weeklyActivity.join(" ")}
-      </section>`
-    )
+      wrapper.insertAdjacentHTML('beforeEnd',
+        `<section class='seven'>
+          <p>ACTIVITY PAST 7 DAYS:</p>
+          ${weeklyActivity.join(" ")}
+        </section>`
+      )
 }
