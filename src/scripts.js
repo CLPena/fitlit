@@ -5,11 +5,20 @@ let body = document.querySelector('body');
 
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
-  let user = new User(userData[0]);
+  let user = new User({
+    id: 1,
+    name: 'Luisa Hane',
+    address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com',
+    strideLength: 4.3,
+    dailyStepGoal: 10000,
+    friends: [45, 46, 47]
+  });
   createDashboard(user, userRepository);
   getHydrationInfo(user);
   getSleepInfo(user);
   getActivityInfo(user);
+  getUserFriendsWidget(user, userRepository);
+
 }
 
 function createDashboard(user, userRepository) {
@@ -29,6 +38,56 @@ function createDashboard(user, userRepository) {
       <p class='user-data'>${user.dailyStepGoal} | ${userRepository.getAvgStepGoal()}</p>
       <p>FRIENDS</p>
       <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
+    </section>
+  `);
+}
+
+function getFriends(user, userRepository) {
+  let givenDate = activityData.find(day => day.date === "2019/06/28");
+  let currentDate = activityData.indexOf(givenDate);
+  let weeklyActivityData = activityData.slice(currentDate - 6, currentDate + 1);
+  let friends = [];
+
+
+  weeklyActivityData.find(el => el.userID === 1 ? friends.push(el) : '');
+  let allFriendsStepActivity = user.friends.reduce((acc, currentFriend) => {
+    weeklyActivityData.forEach(el => {
+      currentFriend === el.userID ? friends.push(el) : '';
+      let friendsUserData = userRepository.userData.find(user => el.userID === user.id);
+      friends.forEach(friend => friendsUserData.id === friend.userID ? friend['name'] = friendsUserData.name : '');
+    });
+    acc['friendsActivity'] = friends;
+    return acc;
+  }, []);
+  return allFriendsStepActivity.friendsActivity;
+}
+
+function getStepCountWinner(user, userRepository) {
+  let mostSteps = 0;
+  let userFriends = getFriends(user, userRepository);
+  let winner = userFriends.reduce((acc, friend) => {
+    if (mostSteps < friend.numSteps) {
+      mostSteps = friend.numSteps;
+      acc = friend;
+    }
+    return acc;
+  }, {});
+  return winner;
+}
+
+function getUserFriendsWidget(user, userRepository) {
+  let userFriends = getFriends(user, userRepository);
+  let winner = getStepCountWinner(user, userRepository);
+  wrapper.insertAdjacentHTML('afterBegin', `
+    <section class='eight'>
+      <p>FRIENDS STEP COUNT FOR</p>
+      <p>THE WEEK OF: 2019/06/28</p>
+      <p class='user-data'>${userFriends[0].name}: ${userFriends[0].numSteps}</p>
+      <p class='user-data'>${userFriends[1].name}: ${userFriends[1].numSteps}</p>
+      <p class='user-data'>${userFriends[2].name}: ${userFriends[2].numSteps}</p>
+      <p class='user-data'>${userFriends[3].name}: ${userFriends[3].numSteps}</p>
+      <p>WINNER:</p>
+      <p class='user-data'>${winner.name}: ${winner.numSteps}</p>
     </section>
   `);
 }
