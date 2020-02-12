@@ -5,12 +5,39 @@ let body = document.querySelector('body');
 
 function getUserInfo() {
   let userRepository = new UserRepository(userData);
-  let user = new User(userData[0]);
+  let user = new User({
+    id: 1,
+    name: 'Luisa Hane',
+    address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com',
+    strideLength: 4.3,
+    dailyStepGoal: 10000,
+    friends: [16, 4, 8]
+  });
   createDashboard(user, userRepository);
   getHydrationInfo(user);
   getSleepInfo(user);
   getActivityInfo(user);
+  getFriends(user, userRepository);
+  getIncreasingSteps(user);
 }
+
+// function getIncreasingSteps(user) {
+//   let stepIncrementer = 0;
+//   user.activityToDate.reduce((acc, el) => {
+//     if (el.numSteps > stepIncrementer) {
+//       stepIncrementer = el.numSteps;
+//       acc.counter = stepIncrementer;
+//       acc.increasingSteps.push(el.date)
+//       if (acc.increasingSteps.length >= 3) {
+//       }
+//     } else {
+//       acc.counter = 0;
+//       acc.increasingSteps = [];
+//       stepIncrementer = el.numSteps;
+//     }
+//     return acc;
+//   }, {counter: 0, increasingSteps: []})
+// }
 
 function createDashboard(user, userRepository) {
   body.insertAdjacentHTML('afterBegin',
@@ -28,7 +55,76 @@ function createDashboard(user, userRepository) {
       <p>DAILY-STEP-GOAL <span>VS</span> AVERAGE-STEP-GOAL</p>
       <p class='user-data'>${user.dailyStepGoal} | ${userRepository.getAvgStepGoal()}</p>
       <p>FRIENDS</p>
-      <p class='user-data'>${userData[15].name} | ${userData[3].name} | ${userData[7].name}</p>
+      <p class='user-data'>${'Mae Connelly'} | ${'Laney Abshire'} | ${'Garnett Cruickshank'}</p>
+    </section>
+  `);
+}
+
+function getFriends(user, userRepository) {
+  let weekDates = ["2019/06/28", "2019/06/27", "2019/06/26", "2019/06/25", "2019/06/24", "2019/06/23", "2019/06/22"];
+  let usersOnGivenDate = [];
+  weekDates.forEach(date => {
+    activityData.filter(day => {
+      if (day.date === date) {
+        addFriendsToArray(user, day, usersOnGivenDate);
+      }
+    });
+  });
+
+  let friendsActivityWeek = usersOnGivenDate.reduce((acc, el) => {
+    el.date === "2019/06/28" ? acc["2019/06/28"].push(el) : '';
+    el.date === "2019/06/27" ? acc["2019/06/27"].push(el) : '';
+    el.date === "2019/06/26" ? acc["2019/06/26"].push(el) : '';
+    el.date === "2019/06/25" ? acc["2019/06/25"].push(el) : '';
+    el.date === "2019/06/24" ? acc["2019/06/24"].push(el) : '';
+    el.date === "2019/06/23" ? acc["2019/06/23"].push(el) : '';
+    el.date === "2019/06/22" ? acc["2019/06/22"].push(el) : '';
+    return acc;
+  }, {"2019/06/28": [], "2019/06/27": [], "2019/06/26": [], "2019/06/25": [], "2019/06/24": [], "2019/06/23": [], "2019/06/22": []});
+  let winnerName = getStepCountWinner(usersOnGivenDate, userRepository, friendsActivityWeek);
+  getUserFriendsWidget(friendsActivityWeek, userRepository, winnerName);
+}
+
+function addFriendsToArray(user, day, usersOnGivenDate) {
+  user.friends.forEach(friendID => {
+    if (friendID === day.userID) {
+      usersOnGivenDate.push(day)
+    }
+  })
+}
+
+function getStepCountWinner(usersOnGivenDate, userRepository) {
+  let orderedStepCount = usersOnGivenDate.sort((a, b) => b.numSteps - a.numSteps);
+  let stepCountWinner = orderedStepCount.shift();
+  let winner = userRepository.userData.find(user => {
+    if (user.id === stepCountWinner.userID) {
+      return user.name;
+    }
+  });
+  return winner.name;
+}
+
+function getUserFriendsWidget(friendsActivityWeek, userRepository, winnerName) {
+  let friendsKeys = Object.keys(friendsActivityWeek);
+  let weeklyFriends = friendsKeys.map(el => {
+    let currentEls = friendsActivityWeek[el];
+    let namesHTML = currentEls.map(currentEl => {
+      let friend = userRepository.userData.find(user => user.id === currentEl.userID);
+      return `<p>${friend.name} | ${currentEl.numSteps} steps</p>`
+    })
+    let dateHTML = `<p class='user-data'>${currentEls[0].date}:</p>`;
+    return `${dateHTML} ${namesHTML.join(" ")}`
+  })
+  addStepChallengeWidget(weeklyFriends, winnerName);
+}
+
+function addStepChallengeWidget(weeklyFriends, winnerName) {
+  wrapper.insertAdjacentHTML('afterBegin', `
+    <section class='eight'>
+      <p>FRIENDS STEP COUNT FOR</p>
+      <p>THE WEEK OF: 2019/06/28</p>
+      <p>WINNER: ${winnerName}</p>
+      ${weeklyFriends.flat().join(" ")}
     </section>
   `);
 }
@@ -203,10 +299,10 @@ function createWeeklyActivityWidget(userActivityDataObjs) {
     </div>
     `
   });
-    wrapper.insertAdjacentHTML('beforeEnd',
-      `<section class='seven'>
-        <p>ACTIVITY PAST 7 DAYS:</p>
-        ${weeklyActivity.join(" ")}
-      </section>`
-    )
+      wrapper.insertAdjacentHTML('beforeEnd',
+        `<section class='seven'>
+          <p>ACTIVITY PAST 7 DAYS:</p>
+          ${weeklyActivity.join(" ")}
+        </section>`
+      )
 }

@@ -52,7 +52,7 @@ class Sleep {
     return quality;
   }
 
-  getBestSleepersTheWeekOf(date) {
+  getBestNightsSleepOfWeek(date) {
     let week = this.getTheWeekOf(date);
     let bestSleepers = week.filter(day => {
       if (day.sleepQuality > 3) {
