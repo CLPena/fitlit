@@ -26,7 +26,6 @@ class UserRepository {
     let weeklyData = dailyData.slice(currentDate - 6, currentDate + 1);
     return weeklyData;
   }
-}
 
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;
