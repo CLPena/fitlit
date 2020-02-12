@@ -21,23 +21,40 @@ function getUserInfo() {
   getIncreasingSteps(user);
 }
 
-// function getIncreasingSteps(user) {
-//   let stepIncrementer = 0;
-//   user.activityToDate.reduce((acc, el) => {
-//     if (el.numSteps > stepIncrementer) {
-//       stepIncrementer = el.numSteps;
-//       acc.counter = stepIncrementer;
-//       acc.increasingSteps.push(el.date)
-//       if (acc.increasingSteps.length >= 3) {
-//       }
-//     } else {
-//       acc.counter = 0;
-//       acc.increasingSteps = [];
-//       stepIncrementer = el.numSteps;
-//     }
-//     return acc;
-//   }, {counter: 0, increasingSteps: []})
-// }
+// IN PROGRESS FOR ITERATION 5
+function getIncreasingSteps(user) {
+  let stepIncrementer = 0;
+  let x = user.activityToDate.reduce((acc, el) => {
+
+    if (el.numSteps > stepIncrementer) {
+
+      stepIncrementer = el.numSteps;
+      acc.counter = stepIncrementer;
+      acc.increasingSteps.push(el.date);
+
+    } else {
+      acc.counter = 0;
+      acc.increasingSteps = [];
+      stepIncrementer = el.numSteps;
+    }
+    // console.log('this: ', acc.increasingSteps)
+    helper(acc, el);
+    return acc;
+  }, {counter: 0, increasingSteps: []})
+  // console.log(x)
+}
+
+function helper(acc, el) {
+  let trendArray = [];
+  let trend;
+  if (acc.increasingSteps.length >= 3) {
+    trendArray.push(acc.increasingSteps);
+    trend = trendArray.join(" ");
+  }
+  console.log(trendArray.length)
+  console.log('x: ', `Step-count increased ${trend} for ${trendArray.length} days!`)
+  // return trend;
+}
 
 function createDashboard(user, userRepository) {
   body.insertAdjacentHTML('afterBegin',
