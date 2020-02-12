@@ -24,7 +24,7 @@ describe('Sleep', function() {
     sleep1 = new Sleep(1, '2019/06/16', 7, 4.7);
     sleep2 = new Sleep(1, '2019/06/16', 3, 4.7);
     sleep3 = new Sleep(1, '2019/06/16', 10, 4.7);
-    sleep4 = new Sleep(1, '2019/06/16', 10, 2.7);
+    sleep4 = new Sleep(1, '2019/06/16', 7.8, 2.7);
     sleep5 = new Sleep(1, '2019/06/17', 10.8, 3);
     sleep6 = new Sleep(1, '2019/06/17', 10.8, 3);
     sleep7 = new Sleep(1, '2019/06/18', 4.1, 2.2);
@@ -108,12 +108,11 @@ describe('Sleep', function() {
     expect(sleep.getSleepQualityTheWeekOf("2019/06/25")).to.deep.equal([3.6, 2.9, 3.5, 2.2, 1.6, 3.1, 1.2]);
   });
 
-  it.skip('should find users whose avg sleep quality is greater than 3 for a given week', function() {
-    expect(sleep.getBestSleepersTheWeekOf("2019/06/25")).to.deep.equal([sleep4, sleep6, sleep9]);
-    expect(sleep.getBestSleepersTheWeekOf("2019/06/21")).to.deep.equal([sleep12, sleep4, sleep6]);
+  it('should find nights of sleep whose sleep quality is greater than 3 for a given week', function() {
+    expect(sleep.getBestNightsSleepOfWeek("2019/06/25")).to.deep.equal([sleep8, sleep10, sleep13]);
   });
 
-  it.skip('should find the user who slept the most hours on a given day', function() {
-    expect(sleep.getMostRestedUserOn('2019/06/16')).to.deep.equal([sleep12, sleep13]);
+  it('should find the night a user slept the most hours on a given day', function() {
+    expect(sleep.getMostRestedUserOn('2019/06/16')).to.deep.equal([sleep3]);
   });
 });
