@@ -71,46 +71,21 @@ function createDashboard(user, userRepository) {
 }
 
 function getFriends(user, userRepository) {
-// output: array of objects with each friends activity data for the last 7 dailySleep
-
-// {day1: [{name: sarah, steps: 23423, flights: 4}, {name: joe, steps:23454, flights: 4}],
-// day2: [{name: sarah, steps: 678768, flights: 43333}, {name: joe, steps:006, flights: 0}]
-// }
   let weekDates = ["2019/06/28", "2019/06/27", "2019/06/26", "2019/06/25", "2019/06/24", "2019/06/23", "2019/06/22"];
-  let yes;
-  let blah = [];
   let usersOnGivenDate = [];
-
   // FOR EACH DATE OF THE WEEK ...
   weekDates.forEach(date => {
-
     // FILTER THROUGH ACTIVITY DATA ...
     let allUsersOnGivenDate = activityData.filter(day => {
-
       // IF DATA'S DATE === A DATE IN OUR WEEK ...
       if (day.date === date) {
-
         // PUSH ACTIVITY OBJ TO USERS ON GIVEN DAY ARRAY ...
         addFriendsToArray(user, day, usersOnGivenDate);
-        // GO THROUGH usersOnGivenDate ARRAY ...
-          // REDUCE FUNCTION ...
-
-        // yes = usersOnGivenDate.reduce((acc, el) => {
-        //     blah.push(el);
-        //     acc[date] = blah;
-        //
-        //   return acc;
-        // }, {});
-
       }; // (end of the if statement in the filter loop)
     }); // (end of the filter loop)
   }); // (end of the forEach loop)
 
-  // console.log('usersOnGivenDate', usersOnGivenDate);
-  yes = usersOnGivenDate.reduce((acc, el) => {
-
-    // console.log(typeof(el.date));
-    // let d = Object.keys(acc);
+  let friendsActivityWeek = usersOnGivenDate.reduce((acc, el) => {
     el.date === "2019/06/28" ? acc["2019/06/28"].push(el) : '';
     el.date === "2019/06/27" ? acc["2019/06/27"].push(el) : '';
     el.date === "2019/06/26" ? acc["2019/06/26"].push(el) : '';
@@ -119,9 +94,8 @@ function getFriends(user, userRepository) {
     el.date === "2019/06/23" ? acc["2019/06/23"].push(el) : '';
     el.date === "2019/06/22" ? acc["2019/06/22"].push(el) : '';
     return acc;
-
   }, {"2019/06/28": [], "2019/06/27": [], "2019/06/26": [], "2019/06/25": [], "2019/06/24": [], "2019/06/23": [], "2019/06/22": []});
-  console.log('acc: ', yes)
+  getUserFriendsWidget(friendsActivityWeek, userRepository);
 }
 
 function addFriendsToArray(user, day, usersOnGivenDate) {
@@ -166,22 +140,36 @@ function addFriendsToArray(user, day, usersOnGivenDate) {
 //   return winner;
 // }
 
-// function getUserFriendsWidget(user, userRepository) {
-//   let userFriends = getFriends(user, userRepository);
-//   let winner = getStepCountWinner(user, userRepository);
-//   wrapper.insertAdjacentHTML('afterBegin', `
-//     <section class='eight'>
-//       <p>FRIENDS STEP COUNT FOR</p>
-//       <p>THE WEEK OF: 2019/06/28</p>
-//       <p class='user-data'>${userFriends[0].name}: ${userFriends[0].numSteps}</p>
-//       <p class='user-data'>${userFriends[1].name}: ${userFriends[1].numSteps}</p>
-//       <p class='user-data'>${userFriends[2].name}: ${userFriends[2].numSteps}</p>
-//       <p class='user-data'>${userFriends[3].name}: ${userFriends[3].numSteps}</p>
-//       <p>WINNER:</p>
-//       <p class='user-data'>${winner.name}: ${winner.numSteps}</p>
-//     </section>
-//   `);
-// }
+function getUserFriendsWidget(friendsActivityWeek, userRepository) {
+  // let dateHTML;
+  let friendsKeys = Object.keys(friendsActivityWeek);
+  let weeklyFriends = friendsKeys.map(el => {
+    let currentEls = friendsActivityWeek[el];
+
+
+    let namesHTML = currentEls.map(currentEl => {
+      
+      let friend = userRepository.userData.find(user => user.id === currentEl.userID);
+
+      return `<p>${friend.name} | ${currentEl.numSteps} steps</p>`
+    })
+    let dateHTML = `<p class='user-data'>${currentEls[0].date}:</p>`;
+    console.log(namesHTML);
+    console.log(dateHTML);
+    return `${dateHTML} ${namesHTML.join(" ")}`
+  })
+
+  wrapper.insertAdjacentHTML('afterBegin', `
+    <section class='eight'>
+      <p>FRIENDS STEP COUNT FOR</p>
+      <p>THE WEEK OF: 2019/06/28</p>
+      ${weeklyFriends.flat().join(" ")}
+    </section>
+  `);
+}
+
+// <p class='user-data'>${winner.name}: ${winner.numSteps}</p>
+
 
 function getHydrationInfo(user) {
   let userHydrationData = hydrationData.filter(el => el.userID === user.id);
