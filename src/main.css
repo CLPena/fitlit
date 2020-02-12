@@ -31,7 +31,8 @@ main {
 .four,
 .five,
 .six,
-.seven {
+.seven,
+.eight {
   background: #FFFFFF;
   border-radius: 1%;
   padding: 1%;
@@ -57,6 +58,9 @@ main {
 }
 .seven {
   grid-area: seven;
+}
+.eight {
+  grid-area: eight;
 }
 .user-name,
 p {
