@@ -11,7 +11,7 @@ function getUserInfo() {
     address: '15195 Nakia Tunnel, Erdmanport VA 19901-1697', email: 'Diana.Hayes1@hotmail.com',
     strideLength: 4.3,
     dailyStepGoal: 10000,
-    friends: [45, 46, 47]
+    friends: [16, 4, 8]
   });
   createDashboard(user, userRepository);
   getHydrationInfo(user);
@@ -76,34 +76,61 @@ function getFriends(user, userRepository) {
 // {day1: [{name: sarah, steps: 23423, flights: 4}, {name: joe, steps:23454, flights: 4}],
 // day2: [{name: sarah, steps: 678768, flights: 43333}, {name: joe, steps:006, flights: 0}]
 // }
+  let weekDates = ["2019/06/28", "2019/06/27", "2019/06/26", "2019/06/25", "2019/06/24", "2019/06/23", "2019/06/22"];
+  let yes;
+  let blah = [];
   let usersOnGivenDate = [];
-  let allUsersOnGivenDate = activityData.filter(day => {
-    if (day.date === "2019/06/28") {
-      addFriendsToArray(user, day, usersOnGivenDate);
-    };
 
-  } );
+  // FOR EACH DATE OF THE WEEK ...
+  weekDates.forEach(date => {
 
+    // FILTER THROUGH ACTIVITY DATA ...
+    let allUsersOnGivenDate = activityData.filter(day => {
 
+      // IF DATA'S DATE === A DATE IN OUR WEEK ...
+      if (day.date === date) {
 
-  let usersFriends = user.friends;
+        // PUSH ACTIVITY OBJ TO USERS ON GIVEN DAY ARRAY ...
+        addFriendsToArray(user, day, usersOnGivenDate);
+        // GO THROUGH usersOnGivenDate ARRAY ...
+          // REDUCE FUNCTION ...
 
-  allUsersOnGivenDate.reduce((acc, el) => {
-    // console.log('el: ', el)
-    // console.log('acc: ', acc)
+        // yes = usersOnGivenDate.reduce((acc, el) => {
+        //     blah.push(el);
+        //     acc[date] = blah;
+        //
+        //   return acc;
+        // }, {});
 
+      }; // (end of the if statement in the filter loop)
+    }); // (end of the filter loop)
+  }); // (end of the forEach loop)
 
+  // console.log('usersOnGivenDate', usersOnGivenDate);
+  yes = usersOnGivenDate.reduce((acc, el) => {
+
+    // console.log(typeof(el.date));
+    // let d = Object.keys(acc);
+    el.date === "2019/06/28" ? acc["2019/06/28"].push(el) : '';
+    el.date === "2019/06/27" ? acc["2019/06/27"].push(el) : '';
+    el.date === "2019/06/26" ? acc["2019/06/26"].push(el) : '';
+    el.date === "2019/06/25" ? acc["2019/06/25"].push(el) : '';
+    el.date === "2019/06/24" ? acc["2019/06/24"].push(el) : '';
+    el.date === "2019/06/23" ? acc["2019/06/23"].push(el) : '';
+    el.date === "2019/06/22" ? acc["2019/06/22"].push(el) : '';
     return acc;
-  }, {day1: [], day2: [], day3: [], day4: [], day5: [], day6: [], day7: []});
+
+  }, {"2019/06/28": [], "2019/06/27": [], "2019/06/26": [], "2019/06/25": [], "2019/06/24": [], "2019/06/23": [], "2019/06/22": []});
+  console.log('acc: ', yes)
 }
 
-  function addFriendsToArray(user, day, usersOnGivenDate) {
-    user.friends.forEach(friendID => {
-      if (friendID === day.userID) {
-        usersOnGivenDate.push(day)
-      }
-    })
-  }
+function addFriendsToArray(user, day, usersOnGivenDate) {
+  user.friends.forEach(friendID => {
+    if (friendID === day.userID) {
+      usersOnGivenDate.push(day)
+    }
+  })
+}
 
   // let allUsersOnGivenDateIndex = activityData.indexOf(allUsersOnGivenDate);
   // // console.log('given date Index: ', givenDateIndex)
