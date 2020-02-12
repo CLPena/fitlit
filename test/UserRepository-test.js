@@ -146,6 +146,10 @@ describe('User', function() {
         expect(userRepository.getTheWeekOf('2019/06/21')).to.deep.equal([activity1, activity2, activity3, activity4, activity5, activity6, activity7]);
         expect(userRepository.getTheWeekOf('2019/06/22')).to.deep.equal([activity2, activity3, activity4, activity5, activity6, activity7, activity8]);
       });
+
+      it('should find which friend has taken the most steps for a whole week', function() {
+        expect(userRepository.getStepChallengeWinner(userRepository)).to.equal()
+      });
     });
   });
 })

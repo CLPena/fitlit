@@ -108,12 +108,12 @@ describe('Sleep', function() {
     expect(sleep.getSleepQualityTheWeekOf("2019/06/25")).to.deep.equal([3.6, 2.9, 3.5, 2.2, 1.6, 3.1, 1.2]);
   });
 
-  it('should find users whose avg sleep quality is greater than 3 for a given week', function() {
+  it.skip('should find users whose avg sleep quality is greater than 3 for a given week', function() {
     expect(sleep.getBestSleepersTheWeekOf("2019/06/25")).to.deep.equal([sleep4, sleep6, sleep9]);
     expect(sleep.getBestSleepersTheWeekOf("2019/06/21")).to.deep.equal([sleep12, sleep4, sleep6]);
   });
 
-  it('should find the user who slept the most hours on a given day', function() {
+  it.skip('should find the user who slept the most hours on a given day', function() {
     expect(sleep.getMostRestedUserOn('2019/06/16')).to.deep.equal([sleep12, sleep13]);
   });
 });
