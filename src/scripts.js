@@ -21,12 +21,9 @@ function getUserInfo() {
   getIncreasingSteps(user);
 }
 
-// Calculate and display this trend: for a user, what days had increasing steps for 3 or more days?
 function getIncreasingSteps(user) {
   let stepIncrementer = 0;
-
   user.activityToDate.reduce((acc, el) => {
-
     if (el.numSteps > stepIncrementer) {
       // console.log(el.date, el.numSteps)
       stepIncrementer = el.numSteps;
@@ -34,11 +31,9 @@ function getIncreasingSteps(user) {
       acc.increasingSteps.push(el.date)
       if (acc.increasingSteps.length >= 3) {
         // console.log('acc counter & steps: ', acc.counter, acc.increasingSteps)
-
       }
     } else {
       // console.log(el.date, el.numSteps)
-
       acc.counter = 0;
       acc.increasingSteps = [];
       stepIncrementer = el.numSteps;
@@ -50,6 +45,7 @@ function getIncreasingSteps(user) {
 }
 
 function createDashboard(user, userRepository) {
+
   body.insertAdjacentHTML('afterBegin',
     `<header>
       <h1>Welcome, <span>${user.getUsersFirstName()}</span>!<h1>
@@ -65,7 +61,7 @@ function createDashboard(user, userRepository) {
       <p>DAILY-STEP-GOAL <span>VS</span> AVERAGE-STEP-GOAL</p>
       <p class='user-data'>${user.dailyStepGoal} | ${userRepository.getAvgStepGoal()}</p>
       <p>FRIENDS</p>
-      <p class='user-data'>${userData[45].name} | ${userData[46].name} | ${userData[47].name}</p>
+      <p class='user-data'>${'Mae Connelly'} | ${'Laney Abshire'} | ${'Garnett Cruickshank'}</p>
     </section>
   `);
 }
@@ -73,17 +69,13 @@ function createDashboard(user, userRepository) {
 function getFriends(user, userRepository) {
   let weekDates = ["2019/06/28", "2019/06/27", "2019/06/26", "2019/06/25", "2019/06/24", "2019/06/23", "2019/06/22"];
   let usersOnGivenDate = [];
-  // FOR EACH DATE OF THE WEEK ...
   weekDates.forEach(date => {
-    // FILTER THROUGH ACTIVITY DATA ...
     let allUsersOnGivenDate = activityData.filter(day => {
-      // IF DATA'S DATE === A DATE IN OUR WEEK ...
       if (day.date === date) {
-        // PUSH ACTIVITY OBJ TO USERS ON GIVEN DAY ARRAY ...
         addFriendsToArray(user, day, usersOnGivenDate);
-      }; // (end of the if statement in the filter loop)
-    }); // (end of the filter loop)
-  }); // (end of the forEach loop)
+      };
+    });
+  });
 
   let friendsActivityWeek = usersOnGivenDate.reduce((acc, el) => {
     el.date === "2019/06/28" ? acc["2019/06/28"].push(el) : '';
@@ -95,7 +87,8 @@ function getFriends(user, userRepository) {
     el.date === "2019/06/22" ? acc["2019/06/22"].push(el) : '';
     return acc;
   }, {"2019/06/28": [], "2019/06/27": [], "2019/06/26": [], "2019/06/25": [], "2019/06/24": [], "2019/06/23": [], "2019/06/22": []});
-  getUserFriendsWidget(friendsActivityWeek, userRepository);
+  let winnerName = getStepCountWinner(usersOnGivenDate, userRepository, friendsActivityWeek);
+  getUserFriendsWidget(friendsActivityWeek, userRepository, winnerName);
 }
 
 function addFriendsToArray(user, day, usersOnGivenDate) {
@@ -106,70 +99,41 @@ function addFriendsToArray(user, day, usersOnGivenDate) {
   })
 }
 
-  // let allUsersOnGivenDateIndex = activityData.indexOf(allUsersOnGivenDate);
-  // // console.log('given date Index: ', givenDateIndex)
-  // // let weeklyActivityData = activityData.slice(givenDateIndex - 6, givenDateIndex + 1);
-  //
-  // // console.log('weekly data: ', weeklyActivityData)
-  // let friends = [];
-  //
-  // weeklyActivityData.find(el => el.userID === 1 ? friends.push(el) : '');
-  // let allFriendsStepActivity = user.friends.reduce((acc, currentFriend) => {
-  //   weeklyActivityData.forEach(el => {
-  //     currentFriend === el.userID ? friends.push(el) : '';
-  //     let friendsUserData = userRepository.userData.find(user => el.userID === user.id);
-  //     friends.forEach(friend => friendsUserData.id === friend.userID ? friend['name'] = friendsUserData.name : '');
-  //   });
-  //   acc['friendsActivity'] = friends;
-  //   return acc;
-  // }, []);
-  // return allFriendsStepActivity.friendsActivity;
+function getStepCountWinner(usersOnGivenDate, userRepository) {
+  let orderedStepCount = usersOnGivenDate.sort((a, b) => b.numSteps - a.numSteps);
+  let stepCountWinner = orderedStepCount.shift();
+  let winner = userRepository.userData.find(user => {
+    if (user.id === stepCountWinner.userID) {
+      return user.name;
+    }
+  });
+  return winner.name;
+}
 
-
-
-// function getStepCountWinner(user, userRepository) {
-//   let mostSteps = 0;
-//   let userFriends = getFriends(user, userRepository);
-//   let winner = userFriends.reduce((acc, friend) => {
-//     if (mostSteps < friend.numSteps) {
-//       mostSteps = friend.numSteps;
-//       acc = friend;
-//     }
-//     return acc;
-//   }, {});
-//   return winner;
-// }
-
-function getUserFriendsWidget(friendsActivityWeek, userRepository) {
-  // let dateHTML;
+function getUserFriendsWidget(friendsActivityWeek, userRepository, winnerName) {
   let friendsKeys = Object.keys(friendsActivityWeek);
   let weeklyFriends = friendsKeys.map(el => {
     let currentEls = friendsActivityWeek[el];
-
-
     let namesHTML = currentEls.map(currentEl => {
-      
       let friend = userRepository.userData.find(user => user.id === currentEl.userID);
-
       return `<p>${friend.name} | ${currentEl.numSteps} steps</p>`
     })
     let dateHTML = `<p class='user-data'>${currentEls[0].date}:</p>`;
-    console.log(namesHTML);
-    console.log(dateHTML);
     return `${dateHTML} ${namesHTML.join(" ")}`
   })
+  addStepChallengeWidget(weeklyFriends, winnerName);
+}
 
+function addStepChallengeWidget(weeklyFriends, winnerName){
   wrapper.insertAdjacentHTML('afterBegin', `
     <section class='eight'>
       <p>FRIENDS STEP COUNT FOR</p>
       <p>THE WEEK OF: 2019/06/28</p>
+      <p>WINNER: ${winnerName}</p>
       ${weeklyFriends.flat().join(" ")}
     </section>
   `);
 }
-
-// <p class='user-data'>${winner.name}: ${winner.numSteps}</p>
-
 
 function getHydrationInfo(user) {
   let userHydrationData = hydrationData.filter(el => el.userID === user.id);
